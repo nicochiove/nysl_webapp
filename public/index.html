@@ -1,0 +1,121 @@
+<!DOCTYPE>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" sizes="196x196" href="images/nysl_logo.png">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<link rel="manifest" href="manifest.json">
+		<link rel="stylesheet" href="styles/styles.css">
+		<link rel="stylesheet" href="styles/animate.css">
+		<title>NYSL</title>
+	</head>
+	
+	
+	<body>
+		<div id="web_app">
+			<login :user="user_full"></login>
+			
+			<div class="container">
+
+				<div id="content">	
+
+
+
+					<div id="banner" class="rounded-bottom pt-1 my-0">
+
+						<span>
+							<img src="images/banner_chico.png" alt="NYSL logo" class="img-fluid">
+						</span>
+						<span>
+							<p class="text-center lead mb-0">Northside Youth Soccer League</p>
+						</span>
+
+					</div>
+
+					<carousel v-show="main"></carousel>
+
+					<div id="months" v-show="schedule" class="my-4">
+						<div id="months_cards">
+							<mes_btn v-for="month in months" :mes='month'>
+							</mes_btn>
+						</div>	
+						<div id="maps_landscape">
+							<tabla_game_data></tabla_game_data>
+							<iframe id="map_stadium"></iframe>
+						</div>
+					</div>
+
+					<div v-show="locations" class="my-4">
+						<under_dev></under_dev>
+					</div>
+					<div v-show="conta" class="my-4">
+						<under_dev></under_dev>
+					</div>
+
+					<modal name='theOneBigModal' :location="partidoSelec.location" :time="partidoSelec.time" :titulo="partidoSelec.teams" :results="partidoSelec.result" :winner="partidoSelec.winner"></modal>
+					<modal_login></modal_login>
+					<modal_err></modal_err>
+					<modal_success></modal_success>
+					
+					<div id="chat" v-show="chat">
+						<div id="comments">	
+						</div>
+						<label>Comment:</label><span id="char_left"></span><textarea onfocus="countingCharacters()" onkeyup="countingCharacters()" id="comment_text" rows="3" placeholder="Max. 150 characters"></textarea>
+						
+						<button type="button" id="btn-comment" onclick="comment(), countingCharacters()" disabled>SEND</button>
+					</div>
+					
+					
+					
+				</div>	
+
+
+
+			<footer>
+				<navbar></navbar>
+			</footer>
+		</div>
+		</div>
+	</body>
+	
+	<!--SCRIPTS FIREBASE-->	
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+		 https://firebase.google.com/docs/web/setup#config-web-app -->
+
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+		apiKey: "AIzaSyAKC_AL-NjrervGpuz-J4ZfufWF8U0m0v4",
+		authDomain: "nysl-webapp-7b2f9.firebaseapp.com",
+		databaseURL: "https://nysl-webapp-7b2f9.firebaseio.com",
+		projectId: "nysl-webapp-7b2f9",
+		storageBucket: "",
+		messagingSenderId: "463947977974",
+		appId: "1:463947977974:web:0c2f46accc78bef9bcc8d7"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	</script>
+    
+    
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+  	<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+  
+    
+	<!--SCRIPT BOOTSTRAP-->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <!--SCRIPT VUE-->
+   	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+   	
+   	<!--SCRIPT PROPIO-->
+   	<script src="scripts/main.js"></script>
+</html>

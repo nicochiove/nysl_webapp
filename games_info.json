@@ -1,0 +1,85 @@
+var partidos=
+{
+	'months': [{
+		
+		'name': 'september',
+		'data': [
+			{
+			'date': '1st',
+			'partidos':[
+					{
+					'location': 'AJ Katzenmaier',
+					'time': '9:30 a.m.',
+					'teams': ['U1','U4']
+					},
+					{
+					'location': 'Greenbay',
+					'time': '1:00 p.m.',
+					'teams': ['U3','U2']	
+					}
+				]
+			},
+			{
+			'date': '8th',
+			'partidos':[
+					{
+					'location': 'Howard A Yeager',
+					'time': '9:30 a.m.',
+					'teams': ['U5','U6']
+					},
+					{
+					'location': 'Marjorie P Hart',
+					'time': '1:00 p.m.',
+					'teams': ['U6','U1']		
+					}
+				]
+			},
+			{
+			'date': '15th',
+			'partidos':[
+					{
+					'location': 'North',
+					'time': '9:30 a.m.',
+					'teams': ['U2','U4']
+					},
+					{
+					'location': 'AJ Katzenmaier',
+					'time': '1:00 p.m.',
+					'teams': ['U3','U5']	
+					}
+				]
+			},
+			{
+			'date': '22nd',
+			'partidos':[
+					{
+					'location': 'South',
+					'time': '9:30 a.m.',
+					'teams': ['U1','U3']
+					},
+					{
+					'location': 'Howard A Yeager',
+					'time': '1:00 p.m.',
+					'teams': ['U2','U6']	
+					}
+				]
+			},
+			{
+			'date': '29th',
+			'partidos':[
+					{
+					'location': 'Greenbay',
+					'time': '9:30 a.m.',
+					'teams': ['U4','U5']
+					}
+				]
+			},
+		]
+		}
+	]
+}
+		
+		
+		
+		
+		
