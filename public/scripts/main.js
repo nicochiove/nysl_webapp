@@ -183,7 +183,7 @@ const modal_html= `<div class="modal fade" :id="name" tabindex="-1" role="dialog
 					  </div>
 					</div>`
 
-const modal_login= `<div class="modal fade" id="modal_log" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+const modal_login= `<div  style="filter:alpha(opacity=50); opacity:0.5; " class="modal fade" id="modal_log" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 						  <div class="modal-header">
@@ -201,12 +201,12 @@ const modal_login= `<div class="modal fade" id="modal_log" tabindex="-1" role="d
 									<label>Password:
 										<input id="passLog" type="password" required>
 									</label>
-									<button class="btn btn-secondary btn-centered" type="button" onclick="logInWithEmail(), displayBtns()">Login With Email</button>
-									<button class="btn btn-secondary btn-centered" type="button" onclick="createUserEmail()" >Register</button>
+									<button style="color:black!important;" class="btn btn-secondary btn-centered" type="button" onclick="logInWithEmail(), displayBtns()">Login With Email</button>
+									<button style="color:black!important;"class="btn btn-secondary btn-centered" type="button" onclick="createUserEmail()" > or Register</button>
 								</div>
 							</form>
 							<hr>
-							<button class="btn btn-secondary- btn-centered" type="button" onclick="logInWithGoo(),displayBtns()">Login With Google</button>
+							<button class="btn btn-danger" type="button" onclick="logInWithGoo(),displayBtns()"> <i class="fab fa-google mr-1"></i>Login With Google</button>
 						  </div>
 						</div>
 					  </div>
@@ -553,7 +553,7 @@ function getSelectedMatchData(id,baseD){//JUNTA Y DEVUELVE UN OBJETO CON LOS VAL
 
 function crearTablas(datos, mes){//CREA LAS TABLAS CON LOS PARTIDOS
 	let base= datos;
-	let str=`<table class="table table-striped mb-2">
+	let str=`<table class="table table-striped mb-2" >
 							<thead class="text-center align-middle" style="color:white;">
 								<tr>
 									<th>Date</th>

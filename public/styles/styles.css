@@ -370,3 +370,19 @@ p, li {
         filter: blur(12px) opacity(0%);
     }
 }
+.modal-body {
+    color: black;
+    font-weight: bold;
+    font-family: 'Roboto Mono', monospace;
+    text-transform: uppercase;
+}
+.btn-danger {
+    background-color: red!important;
+}
+.bg-primary {
+    background-color: #563D7C !important;
+    color: white;
+}
+a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-primary:focus {
+    background-color: #7b59b2 !important;
+}
