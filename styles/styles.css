@@ -1,0 +1,372 @@
+body {
+    background-color: #0B2F3A;
+    animation-name: fondo;
+    animation-duration: 3s;
+    overflow-x: hidden;
+    max-width: 100vw;
+    min-height: 100vh;
+    padding-bottom: 15vh;
+}
+@keyframes fondo {
+    from {
+        background-color: #290a59;
+    }
+    to {
+        background-color: #0B2F3A;
+    }
+}
+.navbar {
+    background-color: !important#0B2F3A;
+}
+.bg-dark {
+    background-color: #0B2F3A!important;
+}
+a.bg-dark:hover, a.bg-dark:focus, button.bg-dark:hover, button.bg-dark:focus {
+    background-color: #0B2F3A !important;
+}
+.banner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+}
+#logo {
+    width: 40px;
+    height: 40px;
+}
+#stickyNav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+#stickyNav button {
+    padding: 1em 0 1em 0;
+    background-color: #0B2F3A!important;
+    border: none!important;
+    font-family: 'Fredoka One', cursive;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+#stickyNav button:hover {
+    color: #B9B9B9;
+}
+button {
+    font-family: 'Roboto Mono', monospace;
+    color: white;
+}
+#log-in {}
+.btn-secondary {
+    color: #fff;
+    background-color: #0B2F3A;
+    border-color: #290A59;
+}
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #0B2F3A;
+    border-color: #7328ed;
+}
+.btn-secondary:focus, .btn-secondary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
+}
+.text-white {
+    font-size: 25px;
+    font-family: 'Staatliches', cursive;
+    letter-spacing: 1px;
+    text-decoration: none!important;
+    text-transform: uppercase;
+}
+th {
+    font-family: 'Roboto Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+td {
+    font-family: 'Roboto Mono', monospace;
+    text-transform: uppercase;
+}
+/* Smartphones*/
+
+@media only screen and (min-width: 300px) {
+    h5 {
+        font-size: 12px;
+        font-family: 'Fredoka One', cursive;
+        text-transform: uppercase;
+        color: white;
+    }
+    b {
+        font-style: italic;
+        color: white;
+        font-size: 8px;
+    }
+}
+@media only screen and (min-width: 760px) {
+    h5 {
+        color: white;
+        font-size: 18px;
+        font-family: 'Fredoka One', cursive;
+        text-transform: uppercase;
+    }
+    b {
+        font-style: italic;
+        color: white;
+        font-size: 15px;
+    }
+}
+/* Desktops and laptops ----------- */
+
+@media only screen and (min-width: 978px) {
+    h5 {
+        color: white;
+        font-size: 28px;
+        font-family: 'Fredoka One', cursive;
+        text-transform: uppercase;
+    }
+    b {
+        font-style: italic;
+        color: white;
+        font-size: 20px;
+    }
+}
+/* Large screens */
+
+@media only screen and (min-width: 1824px) {
+    h5 {
+        color: white;
+        font-size: 35px;
+        font-family: 'Fredoka One', cursive;
+        text-transform: uppercase;
+    }
+    b {
+        font-style: italic;
+        color: white;
+        font-size: 28px;
+    }
+    .wrapper {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+    .wrapper>* {
+        padding: 2em;
+    }
+    .company-info h3, .company-info ul, .brand {
+        text-align: left;
+    }
+}
+}
+#btn-login {
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+}
+canvas {
+    position: absolute;
+    max-height: 100vh;
+    max-width: 100vw;
+    z-index: -1000;
+}
+.card {
+    background-color: transparent!important;
+    color: white;
+}
+#tablaGameData th, td {
+    color: white;
+}
+.navbar-toggler {
+    display: none!important;
+}
+.navbar-dark .navbar-toggler-icon {
+    background-image: none!important;
+}
+button {
+    background: none!important;
+    border: none;
+}
+.company-info h3, .company-info ul {
+    text-align: center;
+    margin: 0 0 1rem 0;
+}
+.contact form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+.contact form label {
+    display: block;
+}
+.contact form p {
+    margin: 0;
+}
+.contact form .full {
+    grid-column: 1 / 3;
+}
+.contact form button, .contact form input, .contact form textarea {
+    width: 100%;
+    border: 1px solid #c9e6ff;
+    font-weight: bold;
+}
+.contact form button:hover, .contact form button:focus {
+    background: #92bde7;
+    font-weight: bold;
+    color: #B9B9B9;
+    outline: 0;
+    transition: background-color 4s ease-out;
+}
+.alert {
+    text-align: center;
+    padding: 10px;
+    background: #79c879;
+    color: #fff;
+    margin-bottom: 10px;
+    display: none;
+}
+h2 {
+    color: white;
+    letter-spacing: 1px;
+    font-family: 'Staatliches', cursive;
+    text-align: center;
+}
+p, li {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    list-style: none;
+    color: white;
+}
+/* ----------------------------------------------
+----------- animación principio ----------------
+ */
+
+.bounce-out-top {
+    -webkit-animation: bounce-out-top 1.5s both;
+    animation: bounce-out-top 3s both;
+    position: absolute;
+    left: 50%;
+}
+@-webkit-keyframes bounce-out-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+    5% {
+        -webkit-transform: translateY(-30px);
+        transform: translateY(-30px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+    15% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+    25% {
+        -webkit-transform: translateY(-38px);
+        transform: translateY(-38px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+    38% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+    52% {
+        -webkit-transform: translateY(-75px);
+        transform: translateY(-75px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+    70% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+    85% {
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: translateY(-800px);
+        transform: translateY(-800px);
+        opacity: 0;
+    }
+}
+@keyframes bounce-out-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+    5% {
+        -webkit-transform: translateY(-30px);
+        transform: translateY(-30px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+    15% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+    25% {
+        -webkit-transform: translateY(-38px);
+        transform: translateY(-38px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+    38% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+    52% {
+        -webkit-transform: translateY(-75px);
+        transform: translateY(-75px);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+    }
+    70% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out;
+    }
+    85% {
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: translateY(-800px);
+        transform: translateY(-800px);
+        opacity: 0;
+    }
+}
+.text-blur-out {
+    -webkit-animation: text-blur-out 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    animation: text-blur-out 3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+@-webkit-keyframes text-blur-out {
+    0% {
+        -webkit-filter: blur(0.01);
+        filter: blur(0.01);
+    }
+    100% {
+        -webkit-filter: blur(12px) opacity(0%);
+        filter: blur(12px) opacity(0%);
+    }
+}
+@keyframes text-blur-out {
+    0% {
+        -webkit-filter: blur(0.01);
+        filter: blur(0.01);
+    }
+    100% {
+        -webkit-filter: blur(12px) opacity(0%);
+        filter: blur(12px) opacity(0%);
+    }
+}
