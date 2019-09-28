@@ -2,39 +2,63 @@
 //														TEMPLATES
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const carouselTemplate= `<div class="my-0">
-							  <div id="carousel" class="carousel slide" data-ride="carousel">
-								<ol class="carousel-indicators">
-								  <li data-target="#carousel" data-slide-to="0" class="active"></li>
-								  <li data-target="#carousel" data-slide-to="1"></li>
-								  <li data-target="#carousel" data-slide-to="2"></li>
-								</ol>
-								<div class="carousel-inner">
-								  <div class="carousel-item active">
-									<button class="btn btn-link d-block w-100" type="button" @click="stateChanger('schedule')"><img src="./images/schedule_img.png" class="img-fluid d-block" alt="schedule"></button>
+const carouselTemplate= ` <div class="carousel slide animated zoomIn" data-ride="carousel" id="carouselExampleControls">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img alt="..." class="d-block w-100" src="images/img1.png">
+                                </img>
+                                <div class="carousel-caption mt-5">
+                                    <h5>
+                                        download our game rules
+                                    </h5>
+                                    <a href="images/rules.pdf">
+                                        <b>
+                                            click here for download
+                                        </b>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="carousel-item ">
+                                <img alt="..." class="d-block w-100" src="images/img2.png">
+                                </img>
+                                <div class="carousel-caption mt-5">
+                                    <h5>
+                                        Login to join the chat
+                                    </h5>
+                                    <i aria-hidden="true" class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 22px;">
+                                    </i>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img alt="..." class="d-block w-100" src="images/img3.png">
+                                </img>
+                                <div class="carousel-caption mt-5">
+                                    <h5>
+                                        SATURDAY
+                                    </h5>
+                                    <h5>
+                                        U1 VS U6
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" data-slide="prev" href="#carouselExampleControls" role="button">
+                            <span aria-hidden="true" class="carousel-control-prev-icon">
+                            </span>
+                            <span class="sr-only">
+                                Previous
+                            </span>
+                        </a>
+                        <a class="carousel-control-next" data-slide="next" href="#carouselExampleControls" role="button">
+                            <span aria-hidden="true" class="carousel-control-next-icon">
+                            </span>
+                            <span class="sr-only">
+                                Next
+                            </span>
+                        </a>
+                    </div>`
 
-								  </div>
-								  <div class="carousel-item">
-									  <button class="btn btn-link d-block w-100" type="button" @click="stateChanger('locations')"><img src="images/locations_img.png" class="img-fluid d-block" alt="locations"></button>
-
-								  </div>
-								  <div class="carousel-item">
-									  <button class="btn btn-link d-block w-100" type="button" @click="stateChanger('conta')"><img src="images/contatcs_img.png" class="img-fluid d-block" alt="contacts"></button>
-
-								  </div>
-								</div>
-								<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-								  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								  <span class="sr-only">Previous</span>
-								</a>
-								<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-								  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-								  <span class="sr-only">Next</span>
-								</a>
-							  </div>
-							</div>`
-
-const collapseMonths= `<div class="cards">
+const collapseMonths= `<div class="cards animated zoomIn">
 						<div class="card">
 							<div class="card-header text-center align-center bg-dark">
 							  <h2><button class="btn btn-link text-white" type="button" data-toggle="collapse" :data-target="'#'+mes" aria-expanded="false" onclick="hideUnusedLandscape()" aria-controls="september">{{mes}}</button></h2>
@@ -48,12 +72,88 @@ const collapseMonths= `<div class="cards">
 					</div>
 					`
 
-const underConstruction= `	<div>
-								<h2 class="row text-center bg-light udr_const">We're Working to Bring You New Features</h2>
-								<div class="row" id="udr_dev">
-									<img class="col-8 offset-2 img-fluid" src="./images/under_dev.png" alt="Under Construction">
-								</div>
-							</div>`
+const conta= `	 <div class="wrapper  animated zoomIn">
+                        <div class="company-info">
+                            <h2 class="mt-5 ml-5 animated lightSpeedIn">
+                                Contact
+                            </h2>
+                            <ul>
+                                <li>
+                                    <i class="fa fa-map-marker-alt">
+                                    </i>
+                                    123 Fake st
+                                </li>
+                                <li>
+                                    <i class="fa fa-phone">
+                                    </i>
+                                    (555) 555-5555
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope">
+                                    </i>
+                                    nysl@x.com
+                                </li>
+                                <li>
+                                <i class="fa fa-user"></i>
+                                Michael Randall League Coordinator
+                                </li>
+                                <li>
+                                <i class="fab fa-whatsapp"></i>
+                                (630) 690-8132
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="contact animated zoomIn">
+                            <form id="contactForm">
+                                <p>
+                                    <label>
+                                       Name
+                                    </label>
+                                    <input id="name" name="name" required="" type="text">
+                                    </input>
+                                </p>
+                                <p>
+                                    <label>
+                                        Last Name
+                                    </label>
+                                    <input id="lastname" name="lastname" type="text">
+                                    </input>
+                                </p>
+                                <p>
+                                    <label>
+                                        Email Address
+                                    </label>
+                                    <input id="email" name="email" required="" type="email">
+                                    </input>
+                                </p>
+                                <p>
+                                    <label>
+                                        Phone Number
+                                    </label>
+                                    <input id="phone" name="phone" type="text">
+                                    </input>
+                                </p>
+                                <p class="full">
+                                    <label>
+                                        Message
+                                    </label>
+                                    <textarea id="message" name="message" rows="5">
+                                    </textarea>
+                                </p>
+                                <p class="full">
+                                    <button type="submit">
+                                        Submit
+                                    </button>
+                                </p>
+                            </form>
+                        </div>
+                    </div> `
+
+const locations= `
+					<div class="animated zoomIn">
+					<h5> sjdsjsjsdjskskd </h5>
+					</div>
+							`
 
 const modal_html= `<div class="modal fade" :id="name" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered" role="document">
@@ -66,7 +166,7 @@ const modal_html= `<div class="modal fade" :id="name" tabindex="-1" role="dialog
 						  </div>
 						  <div class="modal-body">
 							<div class="row">
-								<table class="table table-bordered text-center">
+								<table class="table table-hover text-center">
 									<tr class="bg-primary w-100"><th>Location</th><th>Time</th></tr>
 									<tr><td>{{location}}</td><td>{{time}}</td></tr>
 									<tr class="bg-primary">
@@ -101,12 +201,12 @@ const modal_login= `<div class="modal fade" id="modal_log" tabindex="-1" role="d
 									<label>Password:
 										<input id="passLog" type="password" required>
 									</label>
-									<button class="btn btn-primary btn-centered" type="button" onclick="logInWithEmail(), displayBtns()">Login With Email</button>
-									<button class="btn btn-primary btn-centered" type="button" onclick="createUserEmail()" >Register</button>
+									<button class="btn btn-secondary btn-centered" type="button" onclick="logInWithEmail(), displayBtns()">Login With Email</button>
+									<button class="btn btn-secondary btn-centered" type="button" onclick="createUserEmail()" >Register</button>
 								</div>
 							</form>
 							<hr>
-							<button class="btn btn-primary btn-centered" type="button" onclick="logInWithGoo(),displayBtns()">Login With Google</button>
+							<button class="btn btn-secondary- btn-centered" type="button" onclick="logInWithGoo(),displayBtns()">Login With Google</button>
 						  </div>
 						</div>
 					  </div>
@@ -144,39 +244,37 @@ const modal_suc= `<div class="modal fade" id="modal_suc" tabindex="-1" role="dia
 					  </div>
 					</div>`
 
-const tablaGameData= `	<table id="tablaGameData" class="table table-bordered text-center border-bottom-0">
-							<tr class="bg-primary"><th>Location</th><th>Time</th></tr>
-							<tr id="tb_landscape" class="bg-light"></tr>
+const tablaGameData= `	<table id="tablaGameData" class="table table-dark text-center border-bottom-0">
+							<tr class="bg-dark"><th>Location</th><th>Time</th></tr>
+							<tr id="tb_landscape" class="bg-dark"></tr>
 							<table id="resultados"></table>
 						</table>`
 
 const login= `<div id="btn-login">
-			<nav class="navbar navbar-dark bg-dark">
-				<button class="navbar-toggler" onclick="displayBtns()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-				  <span class="navbar-toggler-icon"></span>
+			<nav class="navbar navbar-dark bg-dark animated zoomIn">
+				<button onclick="displayBtns()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"> <i style="color: white; background-color:#0B2F3A; "class="fa fa-user" aria-hidden="true"></i></span>
 				</button>
 			</nav>
-			<div class="pos-f-t">
+			<div id="pos-f-t">
 			  <div class="collapse" id="navbarToggleExternalContent">
 				<div class="bg-dark p-4">
-				  <h4 class="text-white">Login</h4>
 					<div v-show="user != null" id="usr_info"></div>
-					<button class="btn btn-primary btn-centered" type="button" onclick="displayBtns()" data-toggle="modal" data-target="#modal_log" id="log-in" >Log IN</button>
-					<button class="btn btn-primary btn-centered" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" type="button" onclick="logOut(),displayBtns()" id="log-out" >Log OUT</button>
+					<button class="btn btn-secondary btn-centered" type="button" onclick="displayBtns()" data-toggle="modal" data-target="#modal_log" id="log-in" >Log IN</button>
+					<button class="btn btn-secondary btn-centered" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" type="button" onclick="logOut(),displayBtns()" id="log-out" >Log OUT</button>
 				</div>
 			  </div>
 			  
 			</div>
 		</div>`
 
-const nav= `<div id="stickyNav" class="bg-dark">
-					<div class="btn-group btn-group-sm" role="group">
-					  <button type="button" class="btn btn-dark" @click="stateChanger('main')">HOME</button>
+const nav= ` <div id="stickyNav" class="btn-group btn-group-sm animated zoomIn " role="group">
+					  <button type="button" class="btn btn-dark " @click="stateChanger('main')">HOME</button>
 					  <button type="button" class="btn btn-dark" @click="stateChanger('schedule')">SCHEDULE</button>
-					  <button type="button" class="btn btn-dark" @click="stateChanger('conta')">CONTACTS</button>
-					  <button type="button" class="btn btn-dark" @click="stateChanger('locations')">LOCATIONS</button>
+					  <button type="button" class="btn btn-dark" @click="stateChanger('locations')">CONTACT</button>
+					  <button type="button" class="btn btn-dark" @click="stateChanger('conta')">LOCATIONS</button>
 					</div>
-				</div>`
+				`
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -280,8 +378,11 @@ var app= new Vue({
 			},		
 			template: collapseMonths,
 		},
-		under_dev: {
-			template: underConstruction,
+		conta: {
+			template: conta,
+		},
+		locations: {
+			template: locations,
 		},
 		
 		
@@ -453,7 +554,7 @@ function getSelectedMatchData(id,baseD){//JUNTA Y DEVUELVE UN OBJETO CON LOS VAL
 function crearTablas(datos, mes){//CREA LAS TABLAS CON LOS PARTIDOS
 	let base= datos;
 	let str=`<table class="table table-striped mb-2">
-							<thead class="text-center align-middle">
+							<thead class="text-center align-middle" style="color:white;">
 								<tr>
 									<th>Date</th>
 									<th>Teams</th>
@@ -781,7 +882,7 @@ function liveComments(match){//TRAE Y MUESTRA LOS COMENTAARIOS DE UN PARTIDO EN 
 		
 		let newComment= snapshot.val();
 		
-		let str= `	<div class="card bounceIn">
+		let str= `	<div class="card">
 				  		<div class="card-body">
 							<h5 class="card-title"><a href="mailto:${newComment.usr_email}">${newComment.usr_name}</a></h5>
 							<h6 class="card-subtitle mb-2 text-muted">${newComment.date}</h6>
