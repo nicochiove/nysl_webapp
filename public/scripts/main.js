@@ -18,27 +18,11 @@ const carouselTemplate= ` <div class="carousel slide animated zoomIn" data-ride=
                                     </a>
                                 </div>
                             </div>
-                            <div class="carousel-item ">
-                                <img alt="..." class="d-block w-100" src="images/img2.png">
-                                </img>
-                                <div class="carousel-caption mt-5">
-                                    <h5>
-                                        Login to join the chat
-                                    </h5>
-                                    <i aria-hidden="true" class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 22px;">
-                                    </i>
-                                </div>
-                            </div>
                             <div class="carousel-item">
                                 <img alt="..." class="d-block w-100" src="images/img3.png">
                                 </img>
-                                <div class="carousel-caption mt-5">
-                                    <h5>
-                                        SATURDAY
-                                    </h5>
-                                    <h5>
-                                        U1 VS U6
-                                    </h5>
+                                <div class="carousel-caption mt-5" id="next_match">
+                                    <!-- PRÓXIMO PARTIDO -->
                                 </div>
                             </div>
                         </div>
@@ -197,7 +181,7 @@ const modal_html= `<div class="modal fade" :id="name" tabindex="-1" role="dialog
 					  </div>
 					</div>`
 
-const modal_login= `<div  style="filter:alpha(opacity=50); opacity:0.5; " class="modal fade" id="modal_log" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+const modal_login= `<div class="modal fade" id="modal_log" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 						  <div class="modal-header">
@@ -210,7 +194,7 @@ const modal_login= `<div  style="filter:alpha(opacity=50); opacity:0.5; " class=
 							<form>
 								<div class="form-group">
 									<label>E-mail:
-										<input id="emailLog" type="email" required placeholder=" yourEmail@example.com">
+										<input id="emailLog" type="email" required placeholder="yourEmail@example.com">
 									</label>
 									<label>Password:
 										<input id="passLog" type="password" required>
@@ -304,7 +288,8 @@ const chat= `<div>
 				</button>
 			</div>`
 
-
+const matchDay= `	<div id="match_day">						
+					</div>`	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //														CONFIGURACION FIREBASE DATABASE
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -323,6 +308,7 @@ var app= new Vue({
 		user_full: null,
 		months: [],
 		mesesValidos: ['JANUARY','FEBREAURY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'],
+		valid_days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
 		main: true,
 		schedule: false,
 		conta: false,
@@ -342,14 +328,13 @@ var app= new Vue({
 						winner: "",
 		},
 		comments: [],
+		ready: false,
 	},
 	created(){
 		
 		iniciarFirebase();
 		traemeAlgo('partidos', 'partidos')
-		traemeAlgo('fields','fields');
-		
-		
+		traemeAlgo('fields','fields');		
 	}
 	,
 	methods: {
@@ -360,9 +345,15 @@ var app= new Vue({
 	watch: {
 		state: function(){
 			state_switcher(this.state);
+		},
+		ready: function(){
+			showTodayMatchs();
 		}
 	},
 	components: {
+		today: {
+			template: matchDay,	
+		},
 		chat:{
 			template: chat,
 		},
@@ -498,13 +489,17 @@ function showUsedLandscape(){//MUESTRA LOS COMPONENTES AL SELECCIONAR PARTIDOS E
 //													FUNCIONES DATABASE
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function getSchedules(){
+function getSchedules(){//BUSCA LOS PARTIDOS POR MES
 	app.months.forEach(month => getMatches(month));
+	
 }
 
-function getMatches(month){
+function getMatches(month){//BUSCA TODOS LOS PARTIDOS PARA UN DETERMINADO MES
 	database.ref('/partidos/'+month.toLowerCase()).once('value').then(function(snapshot) {
 		app.partidos[month.toLowerCase()]= snapshot.val();
+		fixDates();
+		showNextMatch();
+		showTodayMatchs();
 	})
 }
 												   
@@ -534,7 +529,7 @@ function traemeAlgo(queQueres, valor){//TRAE DATOS DE LA BASE DE FIREBASE
 				break;
 		}
 		
-		fixDates();
+		
 	})
 }
 
@@ -599,7 +594,7 @@ function getSelectedMatchData(id,baseD){//JUNTA Y DEVUELVE UN OBJETO CON LOS VAL
 
 function crearTablas(datos, mes){//CREA LAS TABLAS CON LOS PARTIDOS
 	let base= datos;
-	let str=`<table class="table table-striped mb-2" >
+	let str=`<table class="table table-hover table-borderless mb-2" >
 							<thead class="text-center align-middle" style="color:white;">
 								<tr>
 									<th>Date</th>
@@ -616,9 +611,9 @@ function crearTablas(datos, mes){//CREA LAS TABLAS CON LOS PARTIDOS
 									<td>${base[fecha][partido].date}</td>
 									<td>${base[fecha][partido].teams}</td>
 									<td>
-										<button id="${fecha}-${partido}" type="button" class="btn btn-primary btns_portrait" data-toggle="modal" data-target="#theOneBigModal" onclick="loadSelectedMatchData('${fecha}-${partido}','${mes}')">Info</button>
-										<button id="${fecha}-${partido}" type="button" class="btn btn-primary btns_landscape"  onclick="loadTablaSelectedMatch('${fecha}-${partido}','${mes}'), showUsedLandscape()">Info</button>
-										<button id="${fecha}-${partido}" type="button" class="btn btn-success chat-btn" onclick="app.stateChanger('chat'), liveComments('${fecha}-${partido}')"><img class="img-fluid" src="/images/chat_icon_small.png" alt="chat"></button></td>
+										<button id="${fecha}-${partido}" type="button" class="btn btn-primary btns_portrait" data-toggle="modal" data-target="#theOneBigModal" onclick="loadSelectedMatchData('${fecha}-${partido}','${mes}')"><i class="fas fa-info-circle"></i></button>
+										<button id="${fecha}-${partido}" type="button" class="btn btn-primary btns_landscape"  onclick="loadTablaSelectedMatch('${fecha}-${partido}','${mes}'), showUsedLandscape()"><i class="fas fa-info-circle"></i></button>
+										<button id="${fecha}-${partido}" type="button" class="btn btn-success chat-btn" onclick="app.stateChanger('chat'), liveComments('${fecha}-${partido}')"><i class="fas fa-comments"></i></button></td>
 							</tr>
 					`
 							
@@ -658,6 +653,19 @@ function fieldsNames(){
 			}
 		}
 		
+	}
+	function nextMatchesPath(){
+		
+		let today= new Date();
+		
+		for(mes in app.partidos){
+			for(fecha in app.partidos[mes]){
+				for(partido in app.partidos[mes][fecha]){
+					if(app.partidos[mes][fecha][partido].formatedDate > today)
+						return [mes,fecha];
+				}
+			}
+		}
 	}
 
 	function nextMatch(){//DEVUELVE EL PROXIMO PARTIDO A JUGARSE
@@ -719,6 +727,40 @@ function fieldsNames(){
 		}
 		
 		return false;
+	}
+
+	function showNextMatch(){//MUESTRA EL PROXIMO PARTIDO EN EL CAROUSEL
+		
+		let next_match= nextMatch();
+		
+		if(next_match != undefined){
+			let showingNextMatch= document.querySelector('#next_match');
+
+			let str= `	<p class="mt-5"><h5 class="mt-5">${next_match.teams}</h5></p>
+						<p><h6>${app.valid_days[(next_match.formatedDate.getDay())]}</h5></p>
+						<p><h6>${next_match.formatedDate.getHours()}:${next_match.formatedDate.getMinutes()}</h5></p>`
+
+			showingNextMatch.innerHTML= str;
+		}
+	}
+
+	function showTodayMatchs(){
+		
+		let path= nextMatchesPath();
+		
+		if(path!= undefined && isToday_MatchDay(13)){
+			let nextGames= app.partidos[path[0]][path[1]];
+			let todayMatches= document.querySelector('#match_day');
+			let str="";
+			
+			for(game in nextGames){
+				str+=  `	<p><h4>${nextGames[game].teams}</h4></p>
+						<p><h5>${nextGames[game].time}</h5></p>`
+			}
+			
+			todayMatches.innerHTML= str;
+		}
+		
 	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //													FUNCIONES LOGIN
@@ -954,14 +996,15 @@ function borrarComentarios(){//BORRA LOS COMENTARIOS PARA REFRESCAR LA PAGINA
 //									FUNCIONES ANIMACION
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function notDisplayAnimation(){
+function notDisplayAnimation(){//OCULTAR LA ANIMACION DE INICIO
 	setTimeout(notDisplay(), 0);
 }
 
-function notDisplay(){
+function notDisplay(){//QUITA EL DISPLAY DE LA ANIMACION
 	let div= document.getElementById('animacion');
 	div.style.zIndex -1000000;
 	//div.style.width= '0'
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
