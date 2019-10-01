@@ -1,7 +1,6 @@
 button:focus {
     outline: none !important;
 }
-
 body {
     background-color: #0B2F3A;
     animation-name: fondo;
@@ -63,6 +62,9 @@ button {
     border-color: white;
     font-family: inherit;
 }
+#log-in:hover {
+    border-color: #C2C2C2;
+}
 .btn-secondary {
     color: #fff;
     background-color: #0B2F3A;
@@ -96,7 +98,13 @@ td {
 
 @media only screen and (min-width: 300px) {
     h5 {
-        font-size: 12px;
+        font-size: 9px;
+        font-family: 'Fredoka One', cursive;
+        text-transform: uppercase;
+        color: white;
+    }
+    h6 {
+        font-size: 7px;
         font-family: 'Fredoka One', cursive;
         text-transform: uppercase;
         color: white;
@@ -106,18 +114,37 @@ td {
         color: white;
         font-size: 8px;
     }
+    .modal-title {
+        color: black;
+        font-family: 'Fredoka One', cursive;
+        text-transform: uppercase;
+        font-size: 15px;
+    }
+    /* TABLET */
 }
 @media only screen and (min-width: 760px) {
     h5 {
         color: white;
-        font-size: 18px;
+        font-size: 12px;
         font-family: 'Fredoka One', cursive;
         text-transform: uppercase;
+    }
+    h6 {
+        font-size: 9px;
+        font-family: 'Fredoka One', cursive;
+        text-transform: uppercase;
+        color: white;
     }
     b {
         font-style: italic;
         color: white;
         font-size: 15px;
+    }
+    .modal-title {
+        color: black;
+        font-family: 'Fredoka One', cursive;
+        text-transform: uppercase;
+        font-size: 18px;
     }
 }
 /* Desktops and laptops ----------- */
@@ -125,14 +152,26 @@ td {
 @media only screen and (min-width: 978px) {
     h5 {
         color: white;
-        font-size: 28px;
+        font-size: 25px;
         font-family: 'Fredoka One', cursive;
         text-transform: uppercase;
+    }
+    h6 {
+        font-size: 19px;
+        font-family: 'Fredoka One', cursive;
+        text-transform: uppercase;
+        color: white;
     }
     b {
         font-style: italic;
         color: white;
         font-size: 20px;
+    }
+    .modal-title {
+        color: black;
+        font-family: 'Fredoka One', cursive;
+        text-transform: uppercase;
+        font-size: 24px;
     }
 }
 /* Large screens */
@@ -140,7 +179,7 @@ td {
 @media only screen and (min-width: 1824px) {
     h5 {
         color: white;
-        font-size: 35px;
+        font-size: 25px;
         font-family: 'Fredoka One', cursive;
         text-transform: uppercase;
     }
@@ -159,7 +198,12 @@ td {
     .company-info h3, .company-info ul, .brand {
         text-align: left;
     }
-}
+    .modal-title {
+        color: black;
+        font-family: 'Fredoka One', cursive;
+        text-transform: uppercase;
+        font-size: 25px;
+    }
 }
 #btn-login {
     position: fixed;
@@ -240,9 +284,8 @@ p, li {
     list-style: none;
     color: white;
 }
-
-#maps_landscape{
-	display: none;
+#maps_landscape {
+    display: none;
 }
 /* ----------------------------------------------
 ----------- animación principio ----------------
@@ -391,51 +434,54 @@ p, li {
 .btn-danger {
     background-color: red!important;
 }
-.bg-primary {
-    background-color: #563D7C !important;
+.btn-primary {
+    background-color: transparent!important;
     color: white;
+    border: solid 1px #5E1EBF;
 }
-a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-primary:focus {
-    background-color: #7b59b2 !important;
+a.btn-primary:hover, a.btn-primary:focus, button.btn-primary:hover, button.btn-primary:focus {
+    border: solid 1px #8B60CC;
 }
-
-#animacion{
-	position: absolute;
-	width: 70vw;
-	height: 30vh;
-	top: 40vh;
-	margin-left: 15vw;
+.btn-success {
+    border: solid 1px #047743;
 }
-
-#animacion h2{
-	display: block;
-	margin: auto;
-	margin-top: 50%;
+a.btn-success:hover, a.btn-success:focus, button.btn-success:hover, button.btn-success:focus {
+    border: solid 1px #00C66C;
 }
-#animacion img{
-	display: block;
-	margin: auto;
-	margin-top: 50%;
+#animacion {
+    position: absolute;
+    width: 70vw;
+    height: 30vh;
+    top: 40vh;
+    margin-left: 15vw;
 }
-
+#animacion h2 {
+    display: block;
+    margin: auto;
+    margin-top: 50%;
+}
+#animacion img {
+    display: block;
+    margin: auto;
+    margin-top: 50%;
+}
 .wrapper {
     width: 95%;
     margin-left: .5em
 }
-
 .wrapper ul {
     list-style-type: none;
     padding-inline-start: 0;
 }
-
 #user_image {
     width: 3em;
 }
-
 #map_modal {
     width: 100%;
 }
-
 .modal-content td {
     color: black!important;
+}
+.modal-header, .modal-body {
+    background-color: white;
 }
