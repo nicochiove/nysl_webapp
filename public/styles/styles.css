@@ -297,6 +297,12 @@ p, li {
     position: absolute;
     left: 50%;
 }
+.text-blur-out {
+    -webkit-animation: text-blur-out 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    animation: text-blur-out 3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    position: absolute;
+    left: 40%;
+}
 @-webkit-keyframes bounce-out-top {
     0% {
         -webkit-transform: translateY(0);
@@ -401,10 +407,6 @@ p, li {
         opacity: 0;
     }
 }
-.text-blur-out {
-    -webkit-animation: text-blur-out 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-    animation: text-blur-out 3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-}
 @-webkit-keyframes text-blur-out {
     0% {
         -webkit-filter: blur(0.01);
@@ -484,4 +486,20 @@ a.btn-success:hover, a.btn-success:focus, button.btn-success:hover, button.btn-s
 }
 .modal-header, .modal-body {
     background-color: white;
+}
+#comment_text {
+    width: 100vw;
+}
+.comment {
+    float: right;
+    font-family: 'Roboto Mono', monospace;
+    color: white;
+    font-weight: bold;
+}
+a {
+    color: #8E83EF;
+    font-weight: bold;
+}
+.card-subtitle {
+    font-style: italic;
 }
