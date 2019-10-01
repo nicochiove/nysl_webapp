@@ -232,6 +232,10 @@ p, li {
     list-style: none;
     color: white;
 }
+
+#maps_landscape{
+	display: none;
+}
 /* ----------------------------------------------
 ----------- animación principio ----------------
  */
@@ -385,4 +389,23 @@ p, li {
 }
 a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-primary:focus {
     background-color: #7b59b2 !important;
+}
+
+#animacion{
+	position: absolute;
+	width: 70vw;
+	height: 30vh;
+	top: 40vh;
+	margin-left: 15vw;
+}
+
+#animacion h2{
+	display: block;
+	margin: auto;
+	margin-top: 50%;
+}
+#animacion img{
+	display: block;
+	margin: auto;
+	margin-top: 50%;
 }

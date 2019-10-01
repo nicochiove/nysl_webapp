@@ -141,7 +141,7 @@ const conta= `	 <div class="wrapper  animated zoomIn">
                                     </textarea>
                                 </p>
                                 <p class="full">
-                                    <button type="submit">
+                                    <button onclick="saveMessage()" type="button">
                                         Submit
                                     </button>
                                 </p>
@@ -151,9 +151,23 @@ const conta= `	 <div class="wrapper  animated zoomIn">
 
 const locations= `
 					<div class="animated zoomIn">
-					<h5> sjdsjsjsdjskskd </h5>
+					<tarjetas v-for="field in fields" :name="field.name" :src="field.map_url" :location="field.location" :aidi="field.id"></tarjetas>
 					</div>
 							`
+
+const tarjeta_loc= `<div class="cards animated zoomIn">
+						<div class="card">
+							<div class="card-header text-center align-center bg-dark">
+							  <h2><button class="btn btn-link text-white" type="button" data-toggle="collapse" :data-target="'#'+aidi" aria-expanded="false" onclick="hideUnusedLandscape()" aria-controls="fields">{{name}}</button></h2>
+							</div>
+						</div>	
+						<div class="collapse multi-collapse" :id="aidi">
+						  <div class="card card-body p-0" :id="'tabla_'+aidi">
+							<h5>{{location}}</h5>
+							<iframe id="map_locations" :src="src"></iframe>
+						  </div>
+						</div>
+					</div>`
 
 const modal_html= `<div class="modal fade" :id="name" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered" role="document">
@@ -275,6 +289,20 @@ const nav= ` <div id="stickyNav" class="btn-group btn-group-sm animated zoomIn "
 					  <button type="button" class="btn btn-dark" @click="stateChanger('conta')">LOCATIONS</button>
 					</div>
 				`
+const chat= `<div>	
+				<div id="comments">
+                </div>
+                <label>
+                	Comment:
+                </label>
+				<span id="char_left">
+				</span>
+				<textarea id="comment_text" onfocus="countingCharacters()" onkeyup="countingCharacters()" placeholder="Max. 150 characters" rows="3">
+				</textarea>
+				<button disabled="" id="btn-comment" onclick="comment(), countingCharacters()" type="button">
+					SEND
+				</button>
+			</div>`
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -300,7 +328,9 @@ var app= new Vue({
 		conta: false,
 		locations: false,
 		chat: false,
+		loader: true,
 		fields: {},
+		fieldsNames:[],
 		partidos: {},
 		toCommentMatch: "",
 		partidoSelec:{
@@ -333,6 +363,9 @@ var app= new Vue({
 		}
 	},
 	components: {
+		chat:{
+			template: chat,
+		},
 		modal_err:{
 			template: modal_error,
 		},
@@ -382,7 +415,14 @@ var app= new Vue({
 			template: conta,
 		},
 		locations: {
+			props: ['fields'],
 			template: locations,
+			components:{
+				tarjetas:{
+					props:['name','location','src','aidi'],
+					template: tarjeta_loc,
+				}
+			}
 		},
 		
 		
@@ -401,6 +441,7 @@ function state_switcher(newState){//MANEJA EL FLUJO DE LAS PANTALLAS
 			app.locations= false;
 			app.conta= false;
 			app.chat= false;
+			app.loader= false;
 			break;
 		case 'schedule':
 			app.main= false;
@@ -410,6 +451,7 @@ function state_switcher(newState){//MANEJA EL FLUJO DE LAS PANTALLAS
 			fixDates();
 			app.months.forEach(month => document.getElementById('tabla_'+month).innerHTML= crearTablas(app.partidos[month.toLowerCase()], month))
 			app.chat= false;
+			app.loader= false;
 			break;
 		case 'conta':
 			app.main= false;
@@ -417,6 +459,7 @@ function state_switcher(newState){//MANEJA EL FLUJO DE LAS PANTALLAS
 			app.locations= false;
 			app.conta= true;
 			app.chat= false;
+			app.loader= false;
 			break;
 		case 'locations':
 			app.main= false;
@@ -424,6 +467,8 @@ function state_switcher(newState){//MANEJA EL FLUJO DE LAS PANTALLAS
 			app.locations= true;
 			app.conta= false;
 			app.chat= false;
+			app.loader= false;
+			fieldsNames();
 			break;
 		case 'chat':
 			app.main= false;
@@ -431,9 +476,9 @@ function state_switcher(newState){//MANEJA EL FLUJO DE LAS PANTALLAS
 			app.locations= false;
 			app.conta= false;
 			app.chat= true;
+			app.loader= false;
 			break;
 		default:
-			
 	}
 }
 
@@ -489,6 +534,7 @@ function traemeAlgo(queQueres, valor){//TRAE DATOS DE LA BASE DE FIREBASE
 				break;
 		}
 		
+		fixDates();
 	})
 }
 
@@ -582,6 +628,11 @@ function crearTablas(datos, mes){//CREA LAS TABLAS CON LOS PARTIDOS
 	
 	return str;
 }
+
+function fieldsNames(){
+	app.fieldsNames= Object.keys(app.fields);
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //													MANEJO DE FECHAS																					
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -897,4 +948,51 @@ function liveComments(match){//TRAE Y MUESTRA LOS COMENTAARIOS DE UN PARTIDO EN 
 
 function borrarComentarios(){//BORRA LOS COMENTARIOS PARA REFRESCAR LA PAGINA
 	document.getElementById('comments').innerHTML="";
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//									FUNCIONES ANIMACION
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function notDisplayAnimation(){
+	setTimeout(notDisplay(), 0);
+}
+
+function notDisplay(){
+	let div= document.getElementById('animacion');
+	div.style.zIndex -1000000;
+	//div.style.width= '0'
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//							FUNCIONES CONTACTO
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function saveMessage(){//GUARDA LOS MENSAJES ENVIADOS EN LA PESTAÑA DE CONTACTOS
+	let name= document.querySelector('#name').value;
+	let lastName= document.querySelector('#lastname').value;
+	let email= document.querySelector('#email').value;
+	let phone= document.querySelector('#phone').value;
+	let message= document.querySelector('#message').value;
+	
+	let newKey = firebase.database().ref(`contact_messages/`).push().key;
+	let update = {};
+	
+	update[`contact_messages/${newKey}`] = {
+		usr_name: name,
+		usr_lastname: lastName,
+		usr_email: email,
+		message: message,
+		phone: phone,
+		viewed: false,
+	}
+	
+	firebase.database().ref().update(update);
+    
+	document.querySelector('#name').value = "";
+	document.querySelector('#lastname').value="";
+	document.querySelector('#email').value="";
+	document.querySelector('#phone').value="";
+	document.querySelector('#message').value="";
+	
 }

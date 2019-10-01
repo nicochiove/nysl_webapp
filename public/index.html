@@ -24,7 +24,6 @@
                 <div id="content">
                     <div class="banner">
                         <img alt="logo" class="mt-2 mr-2" id="logo" src="images/nysl_logo.png">
-                        </img>
                     </div>
                     <carousel v-show="main">
                     </carousel>
@@ -45,7 +44,7 @@
                         </conta>
                     </div>
                     <div class="my-4" v-show="conta">
-                        <locations>
+                        <locations :fields="fields">
                         </locations>
                     </div>
                     <modal :location="partidoSelec.location" :results="partidoSelec.result" :time="partidoSelec.time" :titulo="partidoSelec.teams" :winner="partidoSelec.winner" name="theOneBigModal">
@@ -57,18 +56,7 @@
                     <modal_success>
                     </modal_success>
                     <div id="chat" v-show="chat">
-                        <div id="comments">
-                        </div>
-                        <label>
-                            Comment:
-                        </label>
-                        <span id="char_left">
-                        </span>
-                        <textarea id="comment_text" onfocus="countingCharacters()" onkeyup="countingCharacters()" placeholder="Max. 150 characters" rows="3">
-                        </textarea>
-                        <button disabled="" id="btn-comment" onclick="comment(), countingCharacters()" type="button">
-                            SEND
-                        </button>
+                        <chat></chat>
                     </div>
                 </div>
                 <footer>
@@ -76,12 +64,13 @@
                     </navbar>
                 </footer>
             </div>
+            <!-- animación -->
+			<div id="animacion" class="animacion" v-show="loader">
+				<img src="images/pelota2.png" class="bounce-out-top" style="width: 40px; height: 40px;">
+				<h2 class="text-blur-out"> Welcome </h2>
+			</div>
         </div>
-        <!-- animación -->
-        <div>
-        <img src="images/pelota2.png" class="bounce-out-top" style="width: 40px; height: 40px;">
-        <h2 class="text-blur-out"> Welcome </h2>
-    </div>
+        
     </body>
     <!--SCRIPTS FIREBASE-->
     <!-- The core Firebase JS SDK is always required and must be listed first -->
