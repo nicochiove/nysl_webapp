@@ -9,6 +9,7 @@
         <meta content="yes" name="apple-mobile-web-app-capable"/>
         <link href="manifest.json" rel="manifest"/>
         <link href="styles/styles.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="styles/particles.css"/>
         <link href="https://fonts.googleapis.com/css?family=Anton|Hammersmith+One|Staatliches|Shadows+Into+Light|Yanone+Kaffeesatz&display=swap" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Anton|Fredoka+One|Patrick+Hand|Paytone+One|Rubik+Mono+One|Source+Code+Pro&display=swap|Roboto+Mono&display=swap" rel="stylesheet"/>
            <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet"/>
@@ -16,7 +17,7 @@
             NYSL
         </title>
     </head>
-    <body>
+    <body id="particles-js">
         <div id="web_app">
             <login :user="user_full">
             </login>
@@ -70,8 +71,11 @@
 				<h2 class="text-blur-out"> Welcome </h2>
 			</div>
         </div>
-        <canvas></canvas>
     </body>
+    <!-- scripts background -->
+<script type="text/javascript" src="scripts/particles.js"></script>
+<script type="text/javascript" src="scripts/app.js"></script>
+<script type="text/javascript" src="scripts/stats.js"></script>
     <!--SCRIPTS FIREBASE-->
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js">
@@ -108,8 +112,6 @@
     </script>
     <!--SCRIPT PROPIO-->
     <script src="scripts/main.js">
-    </script>
-           <script src="scripts/canvas.js">
     </script>
     <script src="https://kit.fontawesome.com/a076d05399.js">
     </script>

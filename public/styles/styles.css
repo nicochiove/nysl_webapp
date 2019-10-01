@@ -1,10 +1,16 @@
+#particles-js {
+    width: 100%;
+    height: 100%;
+    background: #0B2F3A;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
 button:focus {
     outline: none !important;
 }
 body {
-    background-color: #0B2F3A;
-    animation-name: fondo;
-    animation-duration: 3s;
+    margin: 0;
     overflow-x: hidden;
     max-width: 100vw;
     min-height: 100vh;
