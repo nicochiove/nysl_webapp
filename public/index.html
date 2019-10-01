@@ -25,7 +25,7 @@
                     <div class="banner">
                         <img alt="logo" class="mt-2 mr-2" id="logo" src="images/nysl_logo.png">
                     </div>
-                    <carousel v-show="main">
+                    <carousel class="mt-5" v-show="main">
                     </carousel>
                     <div class="my-4" id="months" v-show="schedule">
                         <div id="months_cards">
@@ -70,7 +70,7 @@
 				<h2 class="text-blur-out"> Welcome </h2>
 			</div>
         </div>
-        
+        <canvas></canvas>
     </body>
     <!--SCRIPTS FIREBASE-->
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -108,6 +108,8 @@
     </script>
     <!--SCRIPT PROPIO-->
     <script src="scripts/main.js">
+    </script>
+           <script src="scripts/canvas.js">
     </script>
     <script src="https://kit.fontawesome.com/a076d05399.js">
     </script>
