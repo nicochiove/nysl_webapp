@@ -747,20 +747,24 @@ function fieldsNames(){
 	function showTodayMatchs(){
 		
 		let path= nextMatchesPath();
+		let str="";
+		let todayMatches= document.querySelector('#match_day');
 		
-		if(path!= undefined && isToday_MatchDay(13)){
+		if(path!= undefined && isToday_MatchDay()){
 			let nextGames= app.partidos[path[0]][path[1]];
-			let todayMatches= document.querySelector('#match_day');
-			let str="";
+			
+			
 			
 			for(game in nextGames){
 				str+=  `	<p><h4>${nextGames[game].teams}</h4></p>
 						<p><h5>${nextGames[game].time}</h5></p>`
 			}
 			
-			todayMatches.innerHTML= str;
+			
+		}else{
+			str= "<p><h3>Not Matches Today</h3></p>";
 		}
-		
+		todayMatches.innerHTML= str;
 	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //													FUNCIONES LOGIN
