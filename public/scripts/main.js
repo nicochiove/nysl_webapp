@@ -165,12 +165,12 @@ const modal_html= `<div class="modal fade" :id="name" tabindex="-1" role="dialog
 						  <div class="modal-body">
 							<div class="row">
 								<table class="table table-hover text-center">
-									<tr class="bg-primary w-100"><th>Location</th><th>Time</th></tr>
+									<tr class=" w-100"><th>Location</th><th>Time</th></tr>
 									<tr><td>{{location}}</td><td>{{time}}</td></tr>
-									<tr class="bg-primary">
+									<tr class="">
 										<th>Result</th><td>{{(results || "Not Played Yet")}}</td>
 									</tr>
-									<tr class="bg-primary">
+									<tr class="">
 										<th>Winner</th><td>{{(winner || "Not Played Yet")}}</td>
 									</tr>
 								</table>
@@ -560,7 +560,7 @@ function loadTablaSelectedMatch(id, baseD){//CARGA LOS DATOS PARA LA INFO EN MOD
 	
 	document.getElementById('tb_landscape').innerHTML= `<td>${app.partidoSelec.location}</td><td>${app.partidoSelec.time}</td>`;
 	
-	(app.partidoSelec.isPlayed)? document.getElementById('resultados').innerHTML= `<tr><th class="bg-primary">Result</th><td>${app.partidoSelec.result}</td></tr><tr><th class="bg-primary">Winner</th><td>${(app.partidoSelec.winner || "TIE")}</td></tr>`: document.getElementById('resultados').innerHTML= "";
+	(app.partidoSelec.isPlayed)? document.getElementById('resultados').innerHTML= `<tr><th">Result</th><td>${app.partidoSelec.result}</td></tr><tr><th>Winner</th><td>${(app.partidoSelec.winner || "TIE")}</td></tr>`: document.getElementById('resultados').innerHTML= "";
 	
 	document.getElementById('map_stadium').src= map_location;
 }
