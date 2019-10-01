@@ -58,7 +58,7 @@ const collapseMonths= `<div class="cards animated zoomIn">
 
 const conta= `	 <div class="wrapper  animated zoomIn">
                         <div class="company-info">
-                            <h2 class="mt-5 ml-5 animated lightSpeedIn">
+                            <h2 class="mt-5 animated lightSpeedIn">
                                 Contact
                             </h2>
                             <ul>
@@ -276,14 +276,11 @@ const nav= ` <div id="stickyNav" class="btn-group btn-group-sm animated zoomIn "
 const chat= `<div>	
 				<div id="comments">
                 </div>
-                <label>
-                	Comment:
-                </label>
 				<span id="char_left">
 				</span>
 				<textarea id="comment_text" onfocus="countingCharacters()" onkeyup="countingCharacters()" placeholder="Max. 150 characters" rows="3">
 				</textarea>
-				<button disabled="" id="btn-comment" onclick="comment(), countingCharacters()" type="button">
+				<button class="comment btn btn-secondary" disabled="" id="btn-comment" onclick="comment(), countingCharacters()" type="button">
 					SEND
 				</button>
 			</div>`
@@ -736,9 +733,9 @@ function fieldsNames(){
 		if(next_match != undefined){
 			let showingNextMatch= document.querySelector('#next_match');
 
-			let str= `	<p class="mt-5"><h5 class="mt-5">${next_match.teams}</h5></p>
-						<p><h6>${app.valid_days[(next_match.formatedDate.getDay())]}</h5></p>
-						<p><h6>${next_match.formatedDate.getHours()}:${next_match.formatedDate.getMinutes()}</h5></p>`
+			let str= `	<p class="mt-5">${next_match.teams}</p>
+						<p>${app.valid_days[(next_match.formatedDate.getDay())]}</p>
+						<p>${next_match.formatedDate.getHours()}:${next_match.formatedDate.getMinutes()}</p>`
 
 			showingNextMatch.innerHTML= str;
 		}
@@ -950,8 +947,8 @@ async function showComments(){//FUERA DE USO -- MUESTRA LOS COMENTARIOS
 	for(let i=0; i<app.comments.length; i++){
 		str+= `	<div class="card"">
 				  <div class="card-body">
-				    <h5 class="card-title"><a href="mailto:${app.comments[i].usr_email}">${app.comments[i].usr_name}</a></h5>
-				    <h6 class="card-subtitle mb-2 text-muted">${app.comments[i].date}</h6>
+				    <p class="card-title"><a href="mailto:${app.comments[i].usr_email}">${app.comments[i].usr_name}</a></h5>
+				    <p class="card-subtitle mb-2 text-muted">${app.comments[i].date}</h6>
 				    <p class="card-text">${app.comments[i].comment}</p>
 				    <a href="#" class="card-link">Card link</a>
 				    <a href="#" class="card-link">Another link</a>
@@ -977,8 +974,8 @@ function liveComments(match){//TRAE Y MUESTRA LOS COMENTAARIOS DE UN PARTIDO EN 
 		
 		let str= `	<div class="card">
 				  		<div class="card-body">
-							<h5 class="card-title"><a href="mailto:${newComment.usr_email}">${newComment.usr_name}</a></h5>
-							<h6 class="card-subtitle mb-2 text-muted">${newComment.date}</h6>
+							<p class="card-title"><a href="mailto:${newComment.usr_email}">${newComment.usr_name}</a></p>
+							<p class="card-subtitle mb-2 text-muted">${newComment.date}</p>
 							<p class="card-text">${newComment.comment}</p>
 							<a href="#" class="card-link">Card link</a>
 					  </div>
