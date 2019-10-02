@@ -21,7 +21,7 @@ const carouselTemplate= ` <div class="carousel slide animated zoomIn" data-ride=
                             <div class="carousel-item">
                                 <img alt="..." class="d-block w-100" src="images/img3.png">
                                 </img>
-                                <div class="carousel-caption mt-5" id="next_match">
+                                <div class="carousel-caption" id="next_match">
                                     <!-- PRÓXIMO PARTIDO -->
                                 </div>
                             </div>
@@ -574,7 +574,7 @@ function loadTablaSelectedMatch(id, baseD){//CARGA LOS DATOS PARA LA INFO EN MOD
 	
 	document.getElementById('tb_landscape').innerHTML= `<td>${app.partidoSelec.location}</td><td>${app.partidoSelec.time}</td>`;
 	
-	(app.partidoSelec.isPlayed)? document.getElementById('resultados').innerHTML= `<tr><th">Result</th><td>${app.partidoSelec.result}</td></tr><tr><th>Winner</th><td>${(fixOneTeam(app.partidoSelec.winner) || "TIE")}</td></tr>`: document.getElementById('resultados').innerHTML= "";
+	(app.partidoSelec.isPlayed)? document.getElementById('resultados').innerHTML= `<tbody><tr><th>Result</th><td>${app.partidoSelec.result}</td></tr><tr><th>Winner</th><td>${(fixOneTeam(app.partidoSelec.winner) || "TIE")}</td></tr></tbody>`: document.getElementById('resultados').innerHTML= "";
 	
 	document.getElementById('map_stadium').src= map_location;
 }
@@ -751,7 +751,7 @@ function fieldsNames(){
 			let showingNextMatch= document.querySelector('#next_match');
 
 			let str= `	<p>NEXT MATCH</p>
-						<p class="mt-5">${fixTeams(next_match.teams)}</p>
+						<p>${fixTeams(next_match.teams)}</p>
 						<p>${app.valid_days[(next_match.formatedDate.getDay())]}</p>
 						<p>${next_match.formatedDate.getHours()}:${next_match.formatedDate.getMinutes()}</p>`
 
@@ -778,7 +778,7 @@ function fieldsNames(){
 			
 			
 		}else{
-			str= "<p><h3>Not Matches Today</h3></p>";
+			str= "<p><h3 class='text-center'>No Matches Today</h3></p>";
 		}
 		todayMatches.innerHTML= str;
 	}
