@@ -157,7 +157,7 @@ const modal_html= `<div class="modal fade" :id="name" tabindex="-1" role="dialog
 					  <div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 						  <div class="modal-header">
-							<h5 class="modal-title" :id='name+"ModalLabel"'>{{titulo}}</h5>
+							<h5 class="modal-title" :id='name+"ModalLabel"'>{{fixTeams(titulo)}}</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							  <span aria-hidden="true">&times;</span>
 							</button>
@@ -171,7 +171,7 @@ const modal_html= `<div class="modal fade" :id="name" tabindex="-1" role="dialog
 										<th>Result</th><td>{{(results || "Not Played Yet")}}</td>
 									</tr>
 									<tr class="">
-										<th>Winner</th><td>{{(winner || "Not Played Yet")}}</td>
+										<th>Winner</th><td>{{(fixOneTeam(winner) || "Not Played Yet")}}</td>
 									</tr>
 								</table>
 								<iframe id="map_modal"></iframe>
@@ -326,12 +326,15 @@ var app= new Vue({
 		},
 		comments: [],
 		ready: false,
+		equipos: {},
 	},
 	created(){
 		
 		iniciarFirebase();
-		traemeAlgo('partidos', 'partidos')
-		traemeAlgo('fields','fields');		
+		traemeAlgo('teams','equipos');
+		traemeAlgo('partidos', 'partidos');
+		traemeAlgo('fields','fields');
+
 	}
 	,
 	methods: {
@@ -389,6 +392,18 @@ var app= new Vue({
 		modal: {
 			props: ['name','location','time','titulo','results','winner'],
 			template: modal_html,
+			methods:{
+				fixTeams: function(str){
+					let fixed= str.split('vs');
+					let team_1= app.equipos[fixed[0]];
+					let team_2= app.equipos[fixed[1]];
+
+					return `${team_1} vs ${team_2}`;
+				},
+				fixOneTeam: function(str){
+					return app.equipos[str];
+				}
+			}
 		},
 		mes_btn: {
 			props: ['mes'],
@@ -524,6 +539,8 @@ function traemeAlgo(queQueres, valor){//TRAE DATOS DE LA BASE DE FIREBASE
 				app.months.sort((x,y) => app.mesesValidos.indexOf(x) - app.mesesValidos.indexOf(y));
 				getSchedules();
 				break;
+			case 'equipos':
+				app.equipos= snapshot.val();
 		}
 		
 		
@@ -557,7 +574,7 @@ function loadTablaSelectedMatch(id, baseD){//CARGA LOS DATOS PARA LA INFO EN MOD
 	
 	document.getElementById('tb_landscape').innerHTML= `<td>${app.partidoSelec.location}</td><td>${app.partidoSelec.time}</td>`;
 	
-	(app.partidoSelec.isPlayed)? document.getElementById('resultados').innerHTML= `<tr><th">Result</th><td>${app.partidoSelec.result}</td></tr><tr><th>Winner</th><td>${(app.partidoSelec.winner || "TIE")}</td></tr>`: document.getElementById('resultados').innerHTML= "";
+	(app.partidoSelec.isPlayed)? document.getElementById('resultados').innerHTML= `<tr><th">Result</th><td>${app.partidoSelec.result}</td></tr><tr><th>Winner</th><td>${(fixOneTeam(app.partidoSelec.winner) || "TIE")}</td></tr>`: document.getElementById('resultados').innerHTML= "";
 	
 	document.getElementById('map_stadium').src= map_location;
 }
@@ -606,7 +623,7 @@ function crearTablas(datos, mes){//CREA LAS TABLAS CON LOS PARTIDOS
 			str += `
 							<tr>
 									<td>${base[fecha][partido].date}</td>
-									<td>${base[fecha][partido].teams}</td>
+									<td>${fixTeams(base[fecha][partido].teams)}</td>
 									<td>
 										<button id="${fecha}-${partido}" type="button" class="btn btn-primary btns_portrait" data-toggle="modal" data-target="#theOneBigModal" onclick="loadSelectedMatchData('${fecha}-${partido}','${mes}')"><i class="fas fa-info-circle"></i></button>
 										<button id="${fecha}-${partido}" type="button" class="btn btn-primary btns_landscape"  onclick="loadTablaSelectedMatch('${fecha}-${partido}','${mes}'), showUsedLandscape()"><i class="fas fa-info-circle"></i></button>
@@ -734,7 +751,7 @@ function fieldsNames(){
 			let showingNextMatch= document.querySelector('#next_match');
 
 			let str= `	<p>NEXT MATCH</p>
-						<p class="mt-5">${next_match.teams}</p>
+						<p class="mt-5">${fixTeams(next_match.teams)}</p>
 						<p>${app.valid_days[(next_match.formatedDate.getDay())]}</p>
 						<p>${next_match.formatedDate.getHours()}:${next_match.formatedDate.getMinutes()}</p>`
 
@@ -755,7 +772,7 @@ function fieldsNames(){
 			
 			for(game in nextGames){
 				str+=  `<p><h2>TODAY GAMES</h2></p>	
-						<p><h4>${nextGames[game].teams}</h4></p>
+						<p><h4>${fixTeams(nextGames[game].teams)}</h4></p>
 						<p><h5>${nextGames[game].time}</h5></p>`
 			}
 			
@@ -1038,4 +1055,19 @@ function saveMessage(){//GUARDA LOS MENSAJES ENVIADOS EN LA PESTAÑA DE CONTACTO
 	document.querySelector('#phone').value="";
 	document.querySelector('#message').value="";
 	
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//							FUNCIONES EQUIPOS
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function fixTeams(str){//BUSCA LOS NOMBRES EN LA BASE DE DATOS Y LOS MUESTRA
+	let fixed= str.split('vs');
+	let team_1= app.equipos[fixed[0]];
+	let team_2= app.equipos[fixed[1]];
+
+	return `${team_1} vs ${team_2}`;
+}
+
+function fixOneTeam(str){
+	return app.equipos[str];
 }
