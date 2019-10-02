@@ -100,6 +100,26 @@ td {
     font-family: 'Roboto Mono', monospace;
     text-transform: uppercase;
 }
+#comments{
+    padding-top: 6vh;
+}
+.btns_landscape{
+    display: none;
+}
+.btns_portrait{
+    display: inline-block;
+}
+@media only screen and (orientation: landscape){
+    .btns_landscape{
+    display: inline-block;
+    }
+    .btns_portrait{
+        display: none;
+    }
+    #comments{
+        padding-top: 10vh;
+    }
+}
 /* Smartphones*/
 
 @media only screen and (min-width: 300px) {

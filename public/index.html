@@ -28,6 +28,7 @@
                     </div>
                     <carousel class="mt-5" v-show="main">
                     </carousel>
+                    <today v-show="main"></today>
                     <div class="my-4" id="months" v-show="schedule">
                         <div id="months_cards">
                             <mes_btn :mes="month" v-for="month in months">

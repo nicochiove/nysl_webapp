@@ -733,7 +733,8 @@ function fieldsNames(){
 		if(next_match != undefined){
 			let showingNextMatch= document.querySelector('#next_match');
 
-			let str= `	<p class="mt-5">${next_match.teams}</p>
+			let str= `	<p>NEXT MATCH</p>
+						<p class="mt-5">${next_match.teams}</p>
 						<p>${app.valid_days[(next_match.formatedDate.getDay())]}</p>
 						<p>${next_match.formatedDate.getHours()}:${next_match.formatedDate.getMinutes()}</p>`
 
@@ -744,20 +745,25 @@ function fieldsNames(){
 	function showTodayMatchs(){
 		
 		let path= nextMatchesPath();
+		let str="";
+		let todayMatches= document.querySelector('#match_day');
 		
-		if(path!= undefined && isToday_MatchDay(13)){
+		if(path!= undefined && isToday_MatchDay()){
 			let nextGames= app.partidos[path[0]][path[1]];
-			let todayMatches= document.querySelector('#match_day');
-			let str="";
+			
+			
 			
 			for(game in nextGames){
-				str+=  `	<p><h4>${nextGames[game].teams}</h4></p>
+				str+=  `<p><h2>TODAY GAMES</h2></p>	
+						<p><h4>${nextGames[game].teams}</h4></p>
 						<p><h5>${nextGames[game].time}</h5></p>`
 			}
 			
-			todayMatches.innerHTML= str;
+			
+		}else{
+			str= "<p><h3>Not Matches Today</h3></p>";
 		}
-		
+		todayMatches.innerHTML= str;
 	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //													FUNCIONES LOGIN
@@ -950,8 +956,6 @@ async function showComments(){//FUERA DE USO -- MUESTRA LOS COMENTARIOS
 				    <p class="card-title"><a href="mailto:${app.comments[i].usr_email}">${app.comments[i].usr_name}</a></h5>
 				    <p class="card-subtitle mb-2 text-muted">${app.comments[i].date}</h6>
 				    <p class="card-text">${app.comments[i].comment}</p>
-				    <a href="#" class="card-link">Card link</a>
-				    <a href="#" class="card-link">Another link</a>
 				  </div>
 				</div>`
 	}
@@ -977,7 +981,6 @@ function liveComments(match){//TRAE Y MUESTRA LOS COMENTAARIOS DE UN PARTIDO EN 
 							<p class="card-title"><a href="mailto:${newComment.usr_email}">${newComment.usr_name}</a></p>
 							<p class="card-subtitle mb-2 text-muted">${newComment.date}</p>
 							<p class="card-text">${newComment.comment}</p>
-							<a href="#" class="card-link">Card link</a>
 					  </div>
 					</div>`;
 		
