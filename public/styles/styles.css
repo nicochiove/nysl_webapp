@@ -119,6 +119,12 @@ td {
     #comments{
         padding-top: 10vh;
     }
+    #months{
+        display: grid;
+        grid-column-gap: 10px;
+        grid-template-columns: auto auto;
+        margin-top: 50px!important;
+    }
 }
 /* Smartphones*/
 
