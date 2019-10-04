@@ -7,14 +7,15 @@ const carouselTemplate= ` <div class="carousel slide animated zoomIn" data-ride=
                             <div class="carousel-item active">
                                 <img alt="..." class="d-block w-100" src="images/img1.png">
                                 </img>
-                                <div class="carousel-caption mt-5">
-                                    <h5>
+                                <div id="rules-download" class="carousel-caption mt-5">
+									<img src="images/cloud-download.png">
+                                    <p>
                                         download our game rules
-                                    </h5>
+                                    </p>
                                     <a href="images/rules.pdf">
-                                        <b>
+                                        <small>
                                             click here for download
-                                        </b>
+                                        </small>
                                     </a>
                                 </div>
                             </div>
@@ -88,7 +89,7 @@ const conta= `	 <div class="wrapper  animated zoomIn">
                             </ul>
                         </div>
                         <div class="contact animated zoomIn">
-                            <form id="contactForm">
+                            <form id="contactForm" onsubmit="saveMessage()">
                                 <p>
                                     <label>
                                        Name
@@ -100,7 +101,7 @@ const conta= `	 <div class="wrapper  animated zoomIn">
                                     <label>
                                         Last Name
                                     </label>
-                                    <input id="lastname" name="lastname" type="text">
+                                    <input id="lastname" name="lastname" type="text" required>
                                     </input>
                                 </p>
                                 <p>
@@ -114,18 +115,18 @@ const conta= `	 <div class="wrapper  animated zoomIn">
                                     <label>
                                         Phone Number
                                     </label>
-                                    <input id="phone" name="phone" type="text">
+                                    <input id="phone" name="phone" type="text" required>
                                     </input>
                                 </p>
                                 <p class="full">
                                     <label>
                                         Message
                                     </label>
-                                    <textarea id="message" name="message" rows="5">
+                                    <textarea id="message" name="message" rows="5" required>
                                     </textarea>
                                 </p>
                                 <p class="full">
-                                    <button onclick="saveMessage()" type="button">
+                                    <button type="submit">
                                         Submit
                                     </button>
                                 </p>
@@ -142,7 +143,7 @@ const locations= `
 const tarjeta_loc= `<div class="cards animated zoomIn">
 						<div class="card">
 							<div class="card-header text-center align-center bg-dark">
-							  <h2><button class="btn btn-link text-white" type="button" data-toggle="collapse" :data-target="'#'+aidi" aria-expanded="false" onclick="hideUnusedLandscape()" aria-controls="fields">{{name}}</button></h2>
+							  <button class="btn btn-link text-white" type="button" data-toggle="collapse" :data-target="'#'+aidi" aria-expanded="false" onclick="hideUnusedLandscape()" aria-controls="fields">{{name}}</button>
 							</div>
 						</div>	
 						<div class="collapse multi-collapse" :id="aidi">
@@ -267,10 +268,10 @@ const login= `<div id="btn-login">
 		</div>`
 
 const nav= ` <div id="stickyNav" class="btn-group btn-group-sm animated zoomIn " role="group">
-					  <button type="button" class="btn btn-dark " @click="stateChanger('main')">HOME</button>
-					  <button type="button" class="btn btn-dark" @click="stateChanger('schedule')">SCHEDULE</button>
-					  <button type="button" class="btn btn-dark" @click="stateChanger('locations')">CONTACT</button>
-					  <button type="button" class="btn btn-dark" @click="stateChanger('conta')">LOCATIONS</button>
+					  <button type="button" class="btn btn-dark" @click="stateChanger('main'),scrollUp()">HOME</button>
+					  <button type="button" class="btn btn-dark" @click="stateChanger('schedule'),scrollUp()">SCHEDULE</button>
+					  <button type="button" class="btn btn-dark" @click="stateChanger('locations'),scrollUp()">CONTACT</button>
+					  <button type="button" class="btn btn-dark" @click="stateChanger('conta'),scrollUp()">LOCATIONS</button>
 					</div>
 				`
 const chat= `<div>	
@@ -280,6 +281,8 @@ const chat= `<div>
 				</span>
 				<textarea id="comment_text" onfocus="countingCharacters()" onkeyup="countingCharacters()" placeholder="Max. 150 characters" rows="3">
 				</textarea>
+                <input id="camera" type="file" name="image" accept="image/*" capture="enviroment" style="display:none" >
+				<button class="comment btn btn-secondary" type="button" @click="cam()"><img src="images/camara.png" style="height:1em"></button>
 				<button class="comment btn btn-secondary" disabled="" id="btn-comment" onclick="comment(), countingCharacters()" type="button">
 					SEND
 				</button>
@@ -287,6 +290,14 @@ const chat= `<div>
 
 const matchDay= `	<div id="match_day">						
 					</div>`	
+
+const camera= `	<div id="camera">
+					<canvas id="camera--sensor"></canvas>
+					<video id="camera--view" autoplay playsinline></video>
+					<img src="//:0" alt="" id="camera--output">
+					<button id="camera--trigger">Take a picture</button>
+				</div>`
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //														CONFIGURACION FIREBASE DATABASE
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -312,6 +323,7 @@ var app= new Vue({
 		locations: false,
 		chat: false,
 		loader: true,
+		camera: false,
 		fields: {},
 		fieldsNames:[],
 		partidos: {},
@@ -327,6 +339,7 @@ var app= new Vue({
 		comments: [],
 		ready: false,
 		equipos: {},
+		blobby: ""
 	},
 	created(){
 		
@@ -351,11 +364,19 @@ var app= new Vue({
 		}
 	},
 	components: {
+		camera: {
+			template: camera,	
+		},
 		today: {
 			template: matchDay,	
 		},
 		chat:{
 			template: chat,
+			methods:{
+				cam: function(){
+					document.getElementById('camera').click();
+				}
+			}
 		},
 		modal_err:{
 			template: modal_error,
@@ -368,7 +389,10 @@ var app= new Vue({
 			methods:{
 				stateChanger: function(newState){
 							app.state= newState;
-							}	
+							},
+				scrollUp: function(){
+					document.body.scrollTop= document.documentElement.scrollTop= 0;
+				}
 			}
 		},
 		login:{
@@ -445,6 +469,7 @@ function state_switcher(newState){//MANEJA EL FLUJO DE LAS PANTALLAS
 			app.conta= false;
 			app.chat= false;
 			app.loader= false;
+			app.camera= false;
 			break;
 		case 'schedule':
 			app.main= false;
@@ -455,6 +480,7 @@ function state_switcher(newState){//MANEJA EL FLUJO DE LAS PANTALLAS
 			app.months.forEach(month => document.getElementById('tabla_'+month).innerHTML= crearTablas(app.partidos[month.toLowerCase()], month))
 			app.chat= false;
 			app.loader= false;
+			app.camera= false;
 			break;
 		case 'conta':
 			app.main= false;
@@ -463,6 +489,7 @@ function state_switcher(newState){//MANEJA EL FLUJO DE LAS PANTALLAS
 			app.conta= true;
 			app.chat= false;
 			app.loader= false;
+			app.camera= false;
 			break;
 		case 'locations':
 			app.main= false;
@@ -471,6 +498,7 @@ function state_switcher(newState){//MANEJA EL FLUJO DE LAS PANTALLAS
 			app.conta= false;
 			app.chat= false;
 			app.loader= false;
+			app.camera= false;
 			fieldsNames();
 			break;
 		case 'chat':
@@ -480,7 +508,17 @@ function state_switcher(newState){//MANEJA EL FLUJO DE LAS PANTALLAS
 			app.conta= false;
 			app.chat= true;
 			app.loader= false;
+			app.camera= false;
 			break;
+		case 'camera':
+			app.main= false;
+			app.schedule= false;
+			app.locations= false;
+			app.conta= false;
+			app.chat= false;
+			app.loader= false;
+			app.camera= true;
+			cameraStart();
 		default:
 	}
 }
@@ -768,12 +806,10 @@ function fieldsNames(){
 		if(path!= undefined && isToday_MatchDay()){
 			let nextGames= app.partidos[path[0]][path[1]];
 			
-			
+			str= `<p><h2>TODAY GAMES</h2></p>`
 			
 			for(game in nextGames){
-				str+=  `<p><h2>TODAY GAMES</h2></p>	
-						<p><h4>${fixTeams(nextGames[game].teams)}</h4></p>
-						<p><h5>${nextGames[game].time}</h5></p>`
+				str+=  `<p><h3 class="text-center">${fixTeams(nextGames[game].teams)} <br> <small>${nextGames[game].time}</small></h3></p>`
 			}
 			
 			
@@ -911,10 +947,11 @@ function comment(){
 	let update = {};
 	
 	update[`forum/${match}/${newKey}`] = {
-		usr_name: user,
+		usr_name: (user || user_mail),
 		usr_email: user_mail,
 		comment: comment,
-		date: date
+		date: date,
+		blob: app.blobby
 	}
 	
 	firebase.database().ref().update(update);
@@ -995,7 +1032,7 @@ function liveComments(match){//TRAE Y MUESTRA LOS COMENTAARIOS DE UN PARTIDO EN 
 		
 		let str= `	<div class="card">
 				  		<div class="card-body">
-							<p class="card-title"><a href="mailto:${newComment.usr_email}">${newComment.usr_name}</a></p>
+							<p class="card-title"><a href="mailto:${newComment.usr_email}">${(newComment.usr_name || newComment.usr_email)}</a></p>
 							<p class="card-subtitle mb-2 text-muted">${newComment.date}</p>
 							<p class="card-text">${newComment.comment}</p>
 					  </div>
@@ -1071,3 +1108,44 @@ function fixTeams(str){//BUSCA LOS NOMBRES EN LA BASE DE DATOS Y LOS MUESTRA
 function fixOneTeam(str){
 	return app.equipos[str];
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//							FUNCIONES CAMARA
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* CAMARA SIN APLICACION NATIVA DE CAMARA
+var constraints = { video: { facingMode: "enviroment"}, audio: false };
+const cameraView = document.querySelector("#camera--view"),
+      cameraOutput = document.querySelector("#camera--output"),
+      cameraSensor = document.querySelector("#camera--sensor"),
+      cameraTrigger = document.querySelector("#camera--trigger")
+
+function cameraStart() {
+    navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function(stream) {
+        track = stream.getTracks()[0];
+        cameraView.srcObject = stream;
+    })
+    .catch(function(error) {
+        console.error("Oops. Something is broken.", error);
+    });
+}
+
+cameraTrigger.onclick = function() {
+    cameraSensor.width = cameraView.videoWidth;
+    cameraSensor.height = cameraView.videoHeight;
+    cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
+    cameraOutput.src = cameraSensor.toDataURL("image/webp");
+    cameraOutput.classList.add("taken");
+};
+*/
+
+var cameraEl= document.getElementById('camera');
+
+cameraEl.addEventListener('change', function(evt) {
+	let file = evt.target.files[0];
+	
+	app.blobby= URL.createObjectURL(file);
+})
+
+

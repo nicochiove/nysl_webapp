@@ -60,6 +60,7 @@
                     <div id="chat" v-show="chat">
                         <chat></chat>
                     </div>
+                    <camera v-show="camera"></camera>
                 </div>
                 <footer>
                     <navbar>
@@ -67,9 +68,9 @@
                 </footer>
             </div>
             <!-- animación -->
-			<div id="animacion" class="animacion" v-show="loader">
-				<img src="images/pelota2.png" class="bounce-out-top" style="width: 50px; height: 50px;">
-			</div>
+            <div id="animacion" class="animacion" v-show="loader">
+                <img src="images/pelota2.png" class="bounce-out-top" style="width: 50px; height: 50px;">
+            </div>
         </div>
     </body>
     <!-- scripts background -->
@@ -81,20 +82,20 @@
     <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js">
     </script>
     <!-- TODO: Add SDKs for Firebase products that you want to use
-		 https://firebase.google.com/docs/web/setup#config-web-app -->
+         https://firebase.google.com/docs/web/setup#config-web-app -->
     <script>
         // Your web app's Firebase configuration
-	  var firebaseConfig = {
-		apiKey: "AIzaSyAKC_AL-NjrervGpuz-J4ZfufWF8U0m0v4",
-		authDomain: "nysl-webapp-7b2f9.firebaseapp.com",
-		databaseURL: "https://nysl-webapp-7b2f9.firebaseio.com",
-		projectId: "nysl-webapp-7b2f9",
-		storageBucket: "",
-		messagingSenderId: "463947977974",
-		appId: "1:463947977974:web:0c2f46accc78bef9bcc8d7"
-	  };
-	  // Initialize Firebase
-	  firebase.initializeApp(firebaseConfig);
+      var firebaseConfig = {
+        apiKey: "AIzaSyAKC_AL-NjrervGpuz-J4ZfufWF8U0m0v4",
+        authDomain: "nysl-webapp-7b2f9.firebaseapp.com",
+        databaseURL: "https://nysl-webapp-7b2f9.firebaseio.com",
+        projectId: "nysl-webapp-7b2f9",
+        storageBucket: "",
+        messagingSenderId: "463947977974",
+        appId: "1:463947977974:web:0c2f46accc78bef9bcc8d7"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
     </script>
     <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js">
     </script>
