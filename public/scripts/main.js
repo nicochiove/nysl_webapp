@@ -303,6 +303,7 @@ const camera= `	<div id="camera">
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var database;
+var storage;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //																VUE OBJECT
@@ -587,6 +588,8 @@ function traemeAlgo(queQueres, valor){//TRAE DATOS DE LA BASE DE FIREBASE
 
 function iniciarFirebase(){//INICIA LA CONEXION CON FIREBASE Y CREA UNA REFERENCIA
 	database = firebase.database();
+	storage= firebase.storage();
+	var postedImages= storage.ref('/posted');
 }
 
 function buscarDireccion(estadio){
@@ -951,11 +954,13 @@ function comment(){
 		usr_email: user_mail,
 		comment: comment,
 		date: date,
-		blob: app.blobby
+		blob: app.blobby.name
 	}
 	
 	firebase.database().ref().update(update);
     
+    storage.ref(`postedImages/${match}/${app.blobby.name}`).put(app.blobby);
+
 	document.getElementById('comment_text').value = "";
 
 }
@@ -1029,17 +1034,43 @@ function liveComments(match){//TRAE Y MUESTRA LOS COMENTAARIOS DE UN PARTIDO EN 
 	referencia.on('child_added', function(snapshot){
 		
 		let newComment= snapshot.val();
-		
-		let str= `	<div class="card">
+		let image= storage.ref(`postedImages/${match}/${newComment.blob}`);
+		if(newComment.blob){
+			let str= `	<div class="card">
+					  		<div class="card-body">
+								<p class="card-title"><a href="mailto:${newComment.usr_email}">${(newComment.usr_name || newComment.usr_email)}</a></p>
+								<p class="card-subtitle mb-2 text-muted">${newComment.date}</p>
+								<p class="card-text">${newComment.comment}<br>
+								<img style="height:30vh; width:auto" id="posted-${newComment.blob}"></p>
+						  </div>
+						</div>`;
+
+			comment_section.innerHTML+= str;
+
+			image.getDownloadURL().then(function(url) {
+
+			  //inserted into an <img> element:
+			  var img = document.getElementById(`posted-${newComment.blob}`);
+			  img.src = url;
+			}).catch(function(error) {
+			  // Handle any errors
+			  console.log(error.message);
+			});	
+		}else{
+			let str= `	<div class="card">
 				  		<div class="card-body">
 							<p class="card-title"><a href="mailto:${newComment.usr_email}">${(newComment.usr_name || newComment.usr_email)}</a></p>
 							<p class="card-subtitle mb-2 text-muted">${newComment.date}</p>
 							<p class="card-text">${newComment.comment}</p>
 					  </div>
 					</div>`;
+
+			comment_section.innerHTML+= str;
+		}
 		
-		comment_section.innerHTML+= str;	
 	})
+
+	
 }
 
 function borrarComentarios(){//BORRA LOS COMENTARIOS PARA REFRESCAR LA PAGINA
@@ -1145,7 +1176,7 @@ var cameraEl= document.getElementById('camera');
 cameraEl.addEventListener('change', function(evt) {
 	let file = evt.target.files[0];
 	
-	app.blobby= URL.createObjectURL(file);
+	app.blobby= file;
 })
 
 
