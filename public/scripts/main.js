@@ -949,18 +949,36 @@ function comment(){
 	let newKey = firebase.database().ref(`forum/${match}/`).push().key;
 	let update = {};
 	
-	update[`forum/${match}/${newKey}`] = {
-		usr_name: (user || user_mail),
-		usr_email: user_mail,
-		comment: comment,
-		date: date,
-		blob: app.blobby.name
+	if(app.blobby.name){
+		storage.ref(`postedImages/${match}/${app.blobby.name}`).put(app.blobby).then(function(){
+			update[`forum/${match}/${newKey}`] = {
+			usr_name: (user || user_mail),
+			usr_email: user_mail,
+			comment: comment,
+			date: date,
+			blob: (app.blobby.name || "")
+			}
+			
+			firebase.database().ref().update(update);
+			
+			
+			app.blobby= "";
+		});
+	}else{
+	
+		update[`forum/${match}/${newKey}`] = {
+			usr_name: (user || user_mail),
+			usr_email: user_mail,
+			comment: comment,
+			date: date,
+			blob: (app.blobby.name || "")
+		}
+		firebase.database().ref().update(update);
+		
+		
+		app.blobby= "";
 	}
 	
-	firebase.database().ref().update(update);
-    
-    storage.ref(`postedImages/${match}/${app.blobby.name}`).put(app.blobby);
-
 	document.getElementById('comment_text').value = "";
 
 }
@@ -1040,22 +1058,30 @@ function liveComments(match){//TRAE Y MUESTRA LOS COMENTAARIOS DE UN PARTIDO EN 
 					  		<div class="card-body">
 								<p class="card-title"><a href="mailto:${newComment.usr_email}">${(newComment.usr_name || newComment.usr_email)}</a></p>
 								<p class="card-subtitle mb-2 text-muted">${newComment.date}</p>
-								<p class="card-text">${newComment.comment}<br>
-								<img style="height:30vh; width:auto" id="posted-${newComment.blob}"></p>
+								<div class="card-text">${newComment.comment}<br>
+								<div class="spinner-grow" role="status">
+								  <span class="sr-only">Loading...</span>
+								</div>
+								<img style="height:30vh; width:auto" id="posted-${newComment.blob}"></div>
 						  </div>
 						</div>`;
 
 			comment_section.innerHTML+= str;
-
+			
+			if(image){
 			image.getDownloadURL().then(function(url) {
 
 			  //inserted into an <img> element:
 			  var img = document.getElementById(`posted-${newComment.blob}`);
 			  img.src = url;
+				document.querySelectorAll('.spinner-grow').forEach(i => i.style.display= 'none');
 			}).catch(function(error) {
 			  // Handle any errors
 			  console.log(error.message);
-			});	
+			})
+			}else{
+				console.log('tu mama');
+			}
 		}else{
 			let str= `	<div class="card">
 				  		<div class="card-body">
