@@ -100,35 +100,35 @@ td {
     font-family: 'Roboto Mono', monospace;
     text-transform: uppercase;
 }
-#comments{
+#comments {
     padding-top: 6vh;
 }
-.btns_landscape{
+.btns_landscape {
     display: none;
 }
-.btns_portrait{
+.btns_portrait {
     display: inline-block;
 }
-#camera{
+#camera {
     display: inline-block;
 }
-@media only screen and (orientation: landscape){
-    .btns_landscape{
-    display: inline-block;
+@media only screen and (orientation: landscape) {
+    .btns_landscape {
+        display: inline-block;
     }
-    .btns_portrait{
+    .btns_portrait {
         display: none;
     }
-    #comments{
+    #comments {
         padding-top: 10vh;
     }
-    #months{
+    #months {
         display: grid;
         grid-column-gap: 10px;
         grid-template-columns: auto auto;
         margin-top: 50px!important;
     }
-    #maps_landscape{
+    #maps_landscape {
         position: sticky;
         top: 0;
         display: inline;
@@ -141,7 +141,7 @@ td {
 
 @media only screen and (min-width: 300px) {
     h5 {
-        font-size: 9px;
+        font-size: 15px;
         font-family: 'Fredoka One', cursive;
         text-transform: uppercase;
         color: white;
@@ -195,7 +195,7 @@ td {
 @media only screen and (min-width: 978px) {
     h5 {
         color: white;
-        font-size: 25px;
+        font-size: 20px;
         font-family: 'Fredoka One', cursive;
         text-transform: uppercase;
     }
@@ -209,6 +209,10 @@ td {
         font-style: italic;
         color: white;
         font-size: 20px;
+    }
+    .card {
+        position: relative;
+        left: 35%;
     }
     .modal-title {
         color: black;
@@ -264,7 +268,7 @@ canvas {
     background-color: transparent!important;
     color: white;
 }
-.card-header button{
+.card-header button {
     width: 100%;
 }
 #tablaGameData th, td {
@@ -549,7 +553,7 @@ a {
 .card-subtitle {
     font-style: italic;
 }
-#next_match{
+#next_match {
     display: flex;
     align-items: center;
     flex-flow: column;
@@ -558,13 +562,13 @@ a {
     padding-bottom: 0!important;
     line-height: 1!important;
 }
-#next_match p{
+#next_match p {
     margin-bottom: .5em;
 }
-.table-dark{
+.table-dark {
     background-color: transparent!important;
 }
-#rules-download{
+#rules-download {
     display: flex;
     align-items: center;
     flex-flow: column;
@@ -573,11 +577,24 @@ a {
     padding-bottom: 0!important;
     line-height: 1!important;
 }
-#rules-download img{
+#rules-download img {
     height: 2em;
     width: auto;
     margin-bottom: .5em;
 }
-#rules-download p{
+#rules-download p {
     margin-bottom: .5em;
+}
+#font {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    font-size: 18px;
+}
+#tablaGameData td {
+    font-family: 'Roboto Mono', monospace;
+}
+.btn-secondary {
+    border: solid;
+    border-color: #6c757d;
+    margin-left: 1em;
 }

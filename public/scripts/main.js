@@ -282,7 +282,7 @@ const chat= `<div>
 				<textarea id="comment_text" onfocus="countingCharacters()" onkeyup="countingCharacters()" placeholder="Max. 150 characters" rows="3">
 				</textarea>
                 <input id="camera" type="file" name="image" accept="image/*" capture="enviroment" style="display:none" >
-				<button class="comment btn btn-secondary" type="button" @click="cam()"><img src="images/camara.png" style="height:1em"></button>
+				<button class="comment btn btn-secondary" type="button" @click="cam()"><i style="height:1em" class="fa fa-camera" aria-hidden="true"></i></button>
 				<button class="comment btn btn-secondary" disabled="" id="btn-comment" onclick="comment(), countingCharacters()" type="button">
 					SEND
 				</button>
@@ -817,7 +817,7 @@ function fieldsNames(){
 			
 			
 		}else{
-			str= "<p><h3 class='text-center'>No Matches Today</h3></p>";
+			str= "<p><h3 id='font' class='text-center animated zoomIn'>No Matches Today <i class='fas fa-meh'></i></h3></p>";
 		}
 		todayMatches.innerHTML= str;
 	}
