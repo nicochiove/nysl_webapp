@@ -1,0 +1,25 @@
+[debug] [2019-10-16T14:16:06.664Z] ----------------------------------------------------------------------
+[debug] [2019-10-16T14:16:06.673Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Nicolás\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2019-10-16T14:16:06.674Z] CLI Version:   7.4.0
+[debug] [2019-10-16T14:16:06.674Z] Platform:      win32
+[debug] [2019-10-16T14:16:06.674Z] Node Version:  v10.16.3
+[debug] [2019-10-16T14:16:06.678Z] Time:          Wed Oct 16 2019 11:16:06 GMT-0300 (GMT-03:00)
+[debug] [2019-10-16T14:16:06.678Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-16T14:16:06.765Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-16T14:16:06.766Z] > authorizing via signed-in user
+[debug] [2019-10-16T14:16:06.767Z] [iam] checking project nysl-webapp-7b2f9 for permissions ["firebase.projects.get"]
+[debug] [2019-10-16T14:16:06.773Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/nysl-webapp-7b2f9:testIamPermissions  
+
+[debug] [2019-10-16T14:16:09.492Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-16T14:16:09.496Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/nysl-webapp-7b2f9  
+ 
+[debug] [2019-10-16T14:16:09.978Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Nicolás\Desktop\cosoInc\nysl_webapp-master'...
+[info] 
+[debug] [2019-10-16T14:16:09.996Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/nysl-webapp-7b2f9/webApps/-/config  
+ 
+[debug] [2019-10-16T14:16:11.192Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000

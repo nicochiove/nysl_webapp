@@ -182,67 +182,34 @@ const modal_html= `<div class="modal fade" :id="name" tabindex="-1" role="dialog
 					  </div>
 					</div>`
 
-const modal_login= ` <div aria-hidden="true" aria-labelledby="modalLabel" class="limiter modal fade" id="modal_log" role="dialog" tabindex="-1">
-            <div class="container-login modal-dialog modal-dialog-centered" role="document">
-                <div class="wrap-login p-l-55 p-r-55 p-t-65 p-b-54 modal-content">
-                    <form class="login-form validate-form">
-                        <div class="modal-header">
-                            <span class="modal-title login-form-title p-b-49 logintitle" id="log_modal">
-                                login
-                            </span>
-                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                <span aria-hidden="true">
-                                    ×
-                                </span>
-                            </button>
-                        </div>
-                        <div class="wrap-input validate-input m-b-23" data-validate="Username is required">
-                            <span class="label-input">
-                                Email
-                            </span>
-                            <input id="emailLog" class="input" name="username" placeholder="Type your user" type="text">
-                                <span class="focus-input" data-symbol="">
-                                </span>
-                            </input>
-                        </div>
-                        <div class="wrap-input validate-input" data-validate="Password is required">
-                            <span class="label-input">
-                                Password
-                            </span>
-                            <input id="passLog" class="input" name="pass" placeholder="Type your password" type="password">
-                                <span class="focus-input" data-symbol="">
-                                </span>
-                            </input>
-                        </div>
-                        <div class="container-login-form-btn mt-3">
-                            <div class="wrap-login-form-btn">
-                                <div class="login-form-bgbtn">
-                                </div>
-                               <button class="login-form-btn" type="button" onclick="logInWithEmail(), displayBtns()">Login With Email</button>
-                            </div>
-                        </div>
-                         <div class="txt1 text-center p-t-54 p-b-20 mt-5">
-                           <button class="buttonlog" type="button" onclick="createUserEmail()" > Register</button>
-                        </div>
-                        <div class="txt1 text-center p-t-54 p-b-20 mt-3">
-                            <span>
-                                Or Sign Up With
-                            </span>
-                        </div>
-                        <div id="login-social-item">
-                            <button class="login-social-item bg1" id="facebook">
-                                <i class="fab fa-facebook-f">
-                                </i>
-                            </button>
-                            <button class="login-social-item bg3" id="sign-in-button"  onclick="logInWithGoo(),displayBtns()">
-                               <i class="fab fa-google"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-						`
+const modal_login= `<div class="modal fade" id="modal_log" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h5 class="modal-title" id='log_modal'>LOGIN</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+						  </div>
+						  <div class="modal-body">
+							<form>
+								<div class="form-group">
+									<label>E-mail:
+										<input id="emailLog" type="email" required placeholder="yourEmail@example.com">
+									</label>
+									<label>Password:
+										<input id="passLog" type="password" required>
+									</label>
+									<button style="color:black!important;" class="btn btn-secondary btn-centered" type="button" onclick="logInWithEmail(), displayBtns()">Login With Email</button>
+									<button style="color:black!important;"class="btn btn-secondary btn-centered" type="button" onclick="createUserEmail()" > or Register</button>
+								</div>
+							</form>
+							<hr>
+							<button class="btn btn-danger" type="button" onclick="logInWithGoo(),displayBtns()"> <i class="fab fa-google mr-1"></i>Login With Google</button>
+						  </div>
+						</div>
+					  </div>
+					</div>`
 
 const modal_error= `<div class="modal fade" id="modal_error" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered" role="document">
@@ -300,7 +267,7 @@ const login= `<div id="btn-login">
 			</div>
 		</div>`
 
-const nav= ` <div id ="stickyNav" class="btn-group btn-group-sm animated zoomIn " role="group">
+const nav= ` <div id="stickyNav" class="btn-group btn-group-sm animated zoomIn " role="group">
 					  <button type="button" class="btn btn-dark" @click="stateChanger('main'),scrollUp()">HOME</button>
 					  <button type="button" class="btn btn-dark" @click="stateChanger('schedule'),scrollUp()">SCHEDULE</button>
 					  <button type="button" class="btn btn-dark" @click="stateChanger('locations'),scrollUp()">CONTACT</button>
@@ -321,10 +288,10 @@ const chat= `<div>
 				</button>
 			</div>`
 
-const matchDay = ` <div id="match_day">						
+const matchDay= `	<div id="match_day">						
 					</div>`	
 
-const camera = `	<div id="camera">
+const camera= `	<div id="camera">
 					<canvas id="camera--sensor"></canvas>
 					<video id="camera--view" autoplay playsinline></video>
 					<img src="//:0" alt="" id="camera--output">
@@ -563,7 +530,7 @@ function hideUnusedLandscape(){//OCULTA LOS COMPONENTES CUANDO SE DEJAN DE USAR 
 }
 
 function showUsedLandscape(){//MUESTRA LOS COMPONENTES AL SELECCIONAR PARTIDOS EN MODO LANDSCAPE 
-	document.getElementById('maps_landscape').style.display= 'block';
+	document.getElementById('maps_landscape').style.display= 'inline-block';
 	document.getElementById('tablaGameData').style.display= 'inline-table';
 	document.getElementById('map_stadium').style.display= 'block';
 }
@@ -793,8 +760,30 @@ function fieldsNames(){
 		
 		return false;
 	}
-
-
+/*
+	function isToday_MatchDay(dia){//FUNCION SOBRECARGADA DE PRUEBA EN LA QUE SE PUEDE ELEGIR EL DIA A CHEQUEAR
+		
+		let today= new Date();
+		let mes_today= today.getMonth();
+		let dia_today= dia;
+		
+		
+		
+		for(mes in app.partidos){
+			for(fecha in app.partidos[mes]){
+				for(partido in app.partidos[mes][fecha]){
+					
+					if(app.partidos[mes][fecha][partido].formatedDate.getMonth() === mes_today && app.partidos[mes][fecha][partido].formatedDate.getDate() === dia_today){
+						return true;
+					}
+				
+				}
+			}
+		}
+		
+		return false;
+	}
+*/
 	function showNextMatch(){//MUESTRA EL PROXIMO PARTIDO EN EL CAROUSEL
 		
 		let next_match= nextMatch();
@@ -823,7 +812,7 @@ function fieldsNames(){
 			str= `<p><h2>TODAY GAMES</h2></p>`
 			
 			for(game in nextGames){
-				str+=  `<p><h3 class="text-center mt-5">${fixTeams(nextGames[game].teams)} <br> <small>${nextGames[game].time}</small></h3></p>`
+				str+=  `<p><h3 class="text-center">${fixTeams(nextGames[game].teams)} <br> <small>${nextGames[game].time}</small></h3></p>`
 			}
 			
 			
@@ -1217,50 +1206,3 @@ cameraEl.addEventListener('change', function(evt) {
 })
 
 
-
-/* ----------- facebook ----------- */
-    document.getElementById("facebook").addEventListener("click", function() {
-      var provider = new firebase.auth.FacebookAuthProvider();
-      firebase.auth().signInWithPopup(provider).then(function(result){
-        alert("Exito");
-        console.log(result);
-      }).catch(function(error){
-        alert("Error");
-        console.log(error);
-      })
-    })
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-  // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-  var token = result.credential.accessToken;
-  // The signed-in user info.
-  var user = result.user;
-  // ...
-}).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // The email of the user's account used.
-  var email = error.email;
-  // The firebase.auth.AuthCredential type that was used.
-  var credential = error.credential;
-  // ...
-});
-firebase.auth().signInWithRedirect(provider);
-firebase.auth().getRedirectResult().then(function(result) {
-  if (result.credential) {
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-    var token = result.credential.accessToken;
-    // ...
-  }
-  // The signed-in user info.
-  var user = result.user;
-}).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // The email of the user's account used.
-  var email = error.email;
-  // The firebase.auth.AuthCredential type that was used.
-  var credential = error.credential;
-  // ...
-});
