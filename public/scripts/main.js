@@ -229,12 +229,12 @@ const modal_login= ` <div aria-hidden="true" aria-labelledby="modalLabel" class=
                                 Or Sign Up With
                             </span>
                         </div>
-                        <div class="row mt-3 mb-2">
-                            <button class="login-social-item bg1 ml-6" id="facebook">
+                        <div id="login-social-item">
+                            <button class="login-social-item bg1" id="facebook">
                                 <i class="fab fa-facebook-f">
                                 </i>
                             </button>
-                            <button class="login-social-item bg3 ml-1" id="sign-in-button"  onclick="logInWithGoo(),displayBtns()">
+                            <button class="login-social-item bg3" id="sign-in-button"  onclick="logInWithGoo(),displayBtns()">
                                <i class="fab fa-google"></i>
                             </button>
                         </div>
@@ -794,28 +794,6 @@ function fieldsNames(){
 		return false;
 	}
 
-	function isToday_MatchDay(dia){//FUNCION SOBRECARGADA DE PRUEBA EN LA QUE SE PUEDE ELEGIR EL DIA A CHEQUEAR
-		
-		let today= new Date();
-		let mes_today= today.getMonth();
-		let dia_today= dia;
-		
-		
-		
-		for(mes in app.partidos){
-			for(fecha in app.partidos[mes]){
-				for(partido in app.partidos[mes][fecha]){
-					
-					if(app.partidos[mes][fecha][partido].formatedDate.getMonth() === mes_today && app.partidos[mes][fecha][partido].formatedDate.getDate() === dia_today){
-						return true;
-					}
-				
-				}
-			}
-		}
-		
-		return false;
-	}
 
 	function showNextMatch(){//MUESTRA EL PROXIMO PARTIDO EN EL CAROUSEL
 		
@@ -845,7 +823,7 @@ function fieldsNames(){
 			str= `<p><h2>TODAY GAMES</h2></p>`
 			
 			for(game in nextGames){
-				str+=  `<p><h3 class="text-center">${fixTeams(nextGames[game].teams)} <br> <small>${nextGames[game].time}</small></h3></p>`
+				str+=  `<p><h3 class="text-center mt-5">${fixTeams(nextGames[game].teams)} <br> <small>${nextGames[game].time}</small></h3></p>`
 			}
 			
 			
