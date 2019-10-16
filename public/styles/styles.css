@@ -949,18 +949,18 @@ element.style {
 .login-social-item {
     font-size: 25px;
     color: #fff;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 50px;
+    width: 2em;
+    height: 2em;
     border-radius: 50%;
-    margin: 5px;
     text-align: center;
+}
+#login-social-item {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .login-social-item:hover {
     color: #fff;
@@ -975,9 +975,6 @@ element.style {
 span {
     font-family: 'Roboto Mono', monospace;
 }
-.ml-6 {
-    margin-left: 13rem !important;
-}
 .buttonlog {
     background-color: transparent;
     border-radius: 28px;
@@ -986,4 +983,11 @@ span {
     display: inline-block;
     cursor: pointer;
     color: black;
+}
+h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
